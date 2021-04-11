@@ -11,12 +11,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PizzaController extends AbstractController
 {
     /**
+     * @Route("/pizza/list", name="app_pizza_list")
+     */
+    public function list(): Response
+    {
+        $pizzas = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository(Pizza::class)
+            ->findAll();
+
+        return $this->render('pizza/list.html.twig', [
+            'pizzas' => $pizzas,
+        ]);
+    }
+
+
+    /**
      * @Route("/pizza/generate", name="app_pizza_generate")
      */
     public function generate(Request $request): Response
     {
-        $name = $request->query->get('name') || $request->request->get('name', 'Régina');
-        $price = $request->query->get('price') || $request->request->get('price', 9.9);
+        $name = $request->query->get('name') ?? $request->request->get('name', 'Régina');
+        $price = $request->query->get('price') ?? $request->request->get('price', 9.9);
 
         $pizza = new Pizza();
         $pizza->setName($name);

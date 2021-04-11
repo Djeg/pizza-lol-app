@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Liste des pizzas</title>
+    </head>
+    <body>
+        <h1>Liste des pizzas</h1>
+
+        {% for pizza in pizzas %}
+            <p>La pizza {{ pizza.name }} est à {{ pizza.price }}€</p>
+        {% endfor %}
+    </body>
+</html>
