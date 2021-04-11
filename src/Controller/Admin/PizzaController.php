@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Pizza;
 use App\Form\AdminPizzaType;
@@ -10,10 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
-class AdminPizzaController extends AbstractController
+/**
+ * @Route("/admin/pizza")
+ */
+class PizzaController extends AbstractController
 {
     /**
-     * @Route("/admin/pizza/create", name="app_admin_pizza_create", methods={"GET", "POST"})
+     * @Route("/create", name="app_admin_pizza_create", methods={"GET", "POST"})
      */
     public function create(Request $request): Response
     {
@@ -31,13 +34,13 @@ class AdminPizzaController extends AbstractController
             return $this->redirectToRoute('app_admin_pizza_list');
         }
 
-        return $this->render('admin_pizza/create.html.twig', [
+        return $this->render('admin/pizza/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/admin/pizza/{id}/update", name="app_admin_pizza_update", methods={"GET", "POST"})
+     * @Route("/{id}/update", name="app_admin_pizza_update", methods={"GET", "POST"})
      */
     public function update(Pizza $pizza, Request $request): Response
     {
@@ -56,14 +59,14 @@ class AdminPizzaController extends AbstractController
             return $this->redirectToRoute('app_admin_pizza_list');
         }
 
-        return $this->render('admin_pizza/update.html.twig', [
+        return $this->render('admin/pizza/update.html.twig', [
             'form' => $form->createView(),
             'pizza' => $pizza,
         ]);
     }
 
     /**
-     * @Route("/admin/pizza/list", name="app_admin_pizza_list", methods={"GET"})
+     * @Route("/list", name="app_admin_pizza_list", methods={"GET"})
      */
     public function list(): Response
     {
@@ -89,13 +92,13 @@ class AdminPizzaController extends AbstractController
             ];
         }
 
-        return $this->render('admin_pizza/list.html.twig', [
+        return $this->render('admin/pizza/list.html.twig', [
             'data' => $data,
         ]);
     }
 
     /**
-     * @Route("/admin/pizza/{id}/delete", name="app_admin_pizza_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="app_admin_pizza_delete", methods={"POST"})
      */
     public function delete(Pizza $pizza, Request $request): Response
     {

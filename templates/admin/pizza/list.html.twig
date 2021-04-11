@@ -6,6 +6,8 @@
 
 <h1>Liste des pizzas</h1>
 
+<a href="{{ path('app_admin_pizza_create')}}">Créer une nouvelle pizza</a>
+
 {% for item in data %}
     <div>
         <p>La pizza {{ item.pizza.name }} est a {{ item.pizza.price }} €</p>
