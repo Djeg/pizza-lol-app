@@ -15,8 +15,8 @@ class PizzaController extends AbstractController
      */
     public function generate(Request $request): Response
     {
-        $name = $request->query->get('name') || $request->request->get('name', 'Régina');
-        $price = $request->query->get('price') || $request->request->get('price', 9.9);
+        $name = $request->query->get('name') ?? $request->request->get('name', 'Régina');
+        $price = $request->query->get('price') ?? $request->request->get('price', 9.9);
 
         $pizza = new Pizza();
         $pizza->setName($name);
