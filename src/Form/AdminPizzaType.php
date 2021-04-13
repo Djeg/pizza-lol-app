@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Ingredient;
 use App\Entity\Pizza;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,6 +31,11 @@ class AdminPizzaType extends AbstractType
             ])
             ->add('price', MoneyType::class, [
                 'label' => 'Prix de la pizza',
+            ])
+            ->add('ingredients', EntityType::class, [
+                'class' => Ingredient::class,
+                'choice_label' => 'name',
+                'multiple' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
