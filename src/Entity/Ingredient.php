@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\PizzaRepository;
+use App\Repository\IngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PizzaRepository::class)
+ * @ORM\Entity(repositoryClass=IngredientRepository::class)
  */
-class Pizza
+class Ingredient
 {
     /**
      * @ORM\Id
@@ -30,13 +30,13 @@ class Pizza
     private $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Ingredient::class, mappedBy="pizzas")
+     * @ORM\ManyToMany(targetEntity=Pizza::class, inversedBy="ingredients")
      */
-    private $ingredients;
+    private $pizzas;
 
     public function __construct()
     {
-        $this->ingredients = new ArrayCollection();
+        $this->pizzas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,28 +69,25 @@ class Pizza
     }
 
     /**
-     * @return Collection|Ingredient[]
+     * @return Collection|Pizza[]
      */
-    public function getIngredients(): Collection
+    public function getPizzas(): Collection
     {
-        return $this->ingredients;
+        return $this->pizzas;
     }
 
-    public function addIngredient(Ingredient $ingredient): self
+    public function addPizza(Pizza $pizza): self
     {
-        if (!$this->ingredients->contains($ingredient)) {
-            $this->ingredients[] = $ingredient;
-            $ingredient->addPizza($this);
+        if (!$this->pizzas->contains($pizza)) {
+            $this->pizzas[] = $pizza;
         }
 
         return $this;
     }
 
-    public function removeIngredient(Ingredient $ingredient): self
+    public function removePizza(Pizza $pizza): self
     {
-        if ($this->ingredients->removeElement($ingredient)) {
-            $ingredient->removePizza($this);
-        }
+        $this->pizzas->removeElement($pizza);
 
         return $this;
     }
