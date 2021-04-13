@@ -27,8 +27,6 @@ class IngredientFixtures extends Fixture
             $ingredient->setPrice($price);
 
             $manager->persist($ingredient);
-
-            $store[] = $ingredient;
         }
 
         $manager->flush();
