@@ -8,11 +8,19 @@
 
 <a href="{{ path('app_admin_pizza_create')}}">Créer une nouvelle pizza</a>
 
+<hr />
+
 {% for item in data %}
     <div>
-        <p>La pizza {{ item.pizza.name }} est a {{ item.pizza.price }} €</p>
+        <p>La pizza {{ item.pizza.name }} est a {{ item.pizza.price }} € est contient les ingédients :</p>
+        <ul>
+            {% for ingredient in item.pizza.ingredients %}
+                <li>{{ ingredient.name }}</li>
+            {% endfor %}
+        </ul>
         <a href="{{ path('app_admin_pizza_update', { id: item.pizza.id }) }}">Modifier cette pizza</a>
         {{ form(item.form) }}
     </div>
+    <hr />
 {% endfor %}
 {% endblock %}
