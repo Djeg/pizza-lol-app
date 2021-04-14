@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle pizza{% endblock %}
+
+{% block body %}
+
+<h1>{% block page_title %}Créer une nouvelle pizza{% endblock %}</h1>
+
+<a href="{{ path('app_admin_pizza_list') }}">Retour à la liste</a>
+
+{{ form(formView) }}
+
+{% endblock %}
