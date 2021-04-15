@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+composer install
+symfony console doctrine:database:create --if-not-exists
+symfony console doctrine:schema:update --force

@@ -1,0 +1,57 @@
+App\Entity\Ingredient:
+    ingredient_sauce_tomate:
+        name: 'Sauce tomate'
+        price: 0.2
+
+    ingredient_tomate:
+        name: 'Tomates'
+        price: 0.5
+
+    ingredient_jambon:
+        name: 'Jambon'
+        price: 1
+    
+    ingredient_olive:
+        name: 'Olive'
+        price: 1
+    
+    ingredient_chorizo:
+        name: 'Chorizo'
+        price: 1
+
+    ingredient_creme_fraiche:
+        name: 'Crème fraîche'
+        price: 0.4
+
+    ingredient_mozzarella:
+        name: 'Mozzarella'
+        price: 0.5
+
+    ingredient_gruyere:
+        name: 'Gruyère'
+        price: 0.5
+
+App\Entity\Pizza:
+    pizza_regina:
+        name: 'Régina'
+        price: 9.7
+        ingredients:
+            - '@ingredient_sauce_tomate'
+            - '@ingredient_tomate'
+            - '@ingredient_jambon'
+
+    pizza_vegan:
+        name: 'Végétarienne'
+        price: 10.5
+        ingredients:
+            - '@ingredient_sauce_tomate'
+            - '@ingredient_tomate'
+
+    pizza_napolitan:
+        name: 'Napolitaine'
+        price: 11.5
+        ingredients:
+            - '@ingredient_jambon'
+            - '@ingredient_olive'
+            - '@ingredient_sauce_tomate'
+            - '@ingredient_tomate'
