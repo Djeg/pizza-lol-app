@@ -65,4 +65,30 @@ class IngredientController extends AbstractController
 
         return $this->redirectToRoute('app_admin_ingredient_list');
     }
+
+    /**
+     * @Route("/admin/ingredients/{id}/update", name="app_admin_ingredient_update")
+     */
+    public function update(Request $request, Ingredient $ingredient): Response
+    {
+        $form = $this->createForm(AdminIngredientType::class, $ingredient);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+
+            $manager->persist($ingredient);
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_ingredient_list');
+        }
+
+        $formView = $form->createView();
+
+        return $this->render('admin/ingredient/update.html.twig', [
+            'formView' => $formView,
+            'ingredient' => $ingredient,
+        ]);
+    }
 }

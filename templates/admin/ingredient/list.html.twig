@@ -13,7 +13,7 @@
 {% for ingredient in ingredients %}
     <div>
         <p>L'ingrédient {{ ingredient.name }} est a {{ ingredient.price }} €</p>
-        <a href="#">Modifier cet ingrédient</a>
+        <a href="{{ path('app_admin_ingredient_update', { id: ingredient.id }) }}">Modifier cet ingrédient</a>
         <a href="{{ path('app_admin_ingredient_delete', { id: ingredient.id }) }}">Supprimer cet ingrédient</a>
     </div>
     <hr />
