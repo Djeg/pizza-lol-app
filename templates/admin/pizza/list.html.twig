@@ -6,21 +6,17 @@
 
 <h1>Liste des pizzas</h1>
 
-<a href="{{ path('app_admin_pizza_create')}}">Créer une nouvelle pizza</a>
+{{ include('admin/_list.html.twig', {
+    data: pizzas,
+    label_list: 'Retour à la liste des pizzas',
+    label_create: 'Créer une nouvelle pizza',
+    label_modify: 'Mettre à jour la pizza',
+    label_delete: 'Supprimer une pizza',
+    route_create: 'app_admin_pizza_create',
+    route_update: 'app_admin_pizza_update',
+    route_delete: 'app_admin_pizza_delete',
+    label: "La pizza"
+}) }}
 
-<hr />
-
-{% for item in data %}
-    <div>
-        <p>La pizza {{ item.pizza.name }} est a {{ item.pizza.price }} € est contient les ingédients :</p>
-        <ul>
-            {% for ingredient in item.pizza.ingredients %}
-                <li>{{ ingredient.name }}</li>
-            {% endfor %}
-        </ul>
-        <a href="{{ path('app_admin_pizza_update', { id: item.pizza.id }) }}">Modifier cette pizza</a>
-        {{ form(item.form) }}
-    </div>
-    <hr />
-{% endfor %}
 {% endblock %}
+

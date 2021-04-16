@@ -6,17 +6,16 @@
 
 <h1>Liste des ingrédients</h1>
 
-<a href="{{ path('app_admin_ingredient_create') }}">Créer un nouvel ingrédient</a>
-
-<hr />
-
-{% for ingredient in ingredients %}
-    <div>
-        <p>L'ingrédient {{ ingredient.name }} est a {{ ingredient.price }} €</p>
-        <a href="{{ path('app_admin_ingredient_update', { id: ingredient.id }) }}">Modifier cet ingrédient</a>
-        <a href="{{ path('app_admin_ingredient_delete', { id: ingredient.id }) }}">Supprimer cet ingrédient</a>
-    </div>
-    <hr />
-{% endfor %}
+{{ include('admin/_list.html.twig', {
+    data: ingredients,
+    label_list: 'Retour à la liste des ingrédients',
+    label_create: 'Créer un nouvel ingrédient',
+    label_modify: 'Mettre à jour un ingrédient',
+    label_delete: 'Supprimer un ingrédient',
+    route_create: 'app_admin_ingredient_create',
+    route_update: 'app_admin_ingredient_update',
+    route_delete: 'app_admin_ingredient_delete',
+    label: "L'ingrédient"
+}) }}
 
 {% endblock %}

@@ -94,6 +94,7 @@ class PizzaController extends AbstractController
 
         return $this->render('admin/pizza/list.html.twig', [
             'data' => $data,
+            'pizzas' => $pizzas,
         ]);
     }
 

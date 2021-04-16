@@ -1,0 +1,12 @@
+<a href="{{ path(route_create) }}">{{ label_list }}</a>
+
+<hr />
+
+{% for item in data %}
+    <div>
+        <p>{{ label }} {{ item.name }} est a {{ item.price }} €</p>
+        <a href="{{ path(route_update, { id: item.id }) }}">{{ label_modify }}</a>
+        <a href="{{ path(route_delete, { id: item.id }) }}">{{ label_delete }}</a>
+    </div>
+    <hr />
+{% endfor %}
