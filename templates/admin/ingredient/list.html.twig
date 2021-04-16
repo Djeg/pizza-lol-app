@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des ingrédients{% endblock %}
+
+{% block body %}
+
+<h1>Liste des ingrédients</h1>
+
+<a href="#">Créer un nouveau ingrédient</a>
+
+<hr />
+
+{% for ingredient in ingredients %}
+    <div>
+        <p>L'ingrédient {{ ingredient.name }} est a {{ ingredient.price }} €</p>
+        <a href="#">Modifier cet ingrédient</a>
+    </div>
+    <hr />
+{% endfor %}
+
+{% endblock %}
