@@ -17,6 +17,12 @@ sh bin/install
 Vous pouvez avoir besoin de supprimer le fichier `composer.lock` afin que
 la commande s'éxécute sans erreur.
 
+Vous pouvez charger des fixtures en utilisant la commande:
+
+```bash
+symfony console hautelook:fixtures:load
+```
+
 ## Suivre la formation
 
 Afin de suivre la formation rien de plus simple:
