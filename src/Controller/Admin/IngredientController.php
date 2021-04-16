@@ -52,4 +52,17 @@ class IngredientController extends AbstractController
             'formView' => $formView,
         ]);
     }
+
+    /**
+     * @Route("/admin/ingredients/{id}/delete", name="app_admin_ingredient_delete")
+     */
+    public function delete(Ingredient $ingredient): Response
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($ingredient);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_admin_ingredient_list');
+    }
 }
