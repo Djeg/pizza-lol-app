@@ -1,0 +1,13 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Créer un nouveau ingrédient{% endblock %}
+
+{% block content %}
+
+<h1>{% block page_title %}Créer un nouvel ingrédient{% endblock %}</h1>
+
+<a href="{{ path('app_admin_ingredient_list') }}">Retour à la liste des ingrédients</a>
+
+{{ form(formView) }}
+
+{% endblock %}
