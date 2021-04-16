@@ -4,6 +4,11 @@ App\Entity\User:
         roles: ['ROLE_ADMIN']
         password: "\\$argon2id\\$v=19\\$m=65536,t=4,p=1\\$yxUraiUupEB3FHo3F4m/qA\\$YVenebbpuQ1Hs3mGYcHugh5+GyzFRC1qASKpHU31RoA"
 
+    user_jane:
+        email: 'jane@mail.com'
+        roles: ['ROLE_USER']
+        password: "\\$argon2id\\$v=19\\$m=65536,t=4,p=1\\$t1zXSSJaHl2x9XXVH8wB2g\\$VhjMMNLhB6o1MFMaLtesfy92AjMq2304tFoNCgS2OMU"
+
 App\Entity\Ingredient:
     ingredient_sauce_tomate:
         name: 'Sauce tomate'
