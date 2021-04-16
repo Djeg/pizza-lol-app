@@ -1,3 +1,9 @@
+App\Entity\User:
+    user_john:
+        email: 'john@mail.com'
+        roles: ['ROLE_ADMIN']
+        password: "\\$argon2id\\$v=19\\$m=65536,t=4,p=1\\$yxUraiUupEB3FHo3F4m/qA\\$YVenebbpuQ1Hs3mGYcHugh5+GyzFRC1qASKpHU31RoA"
+
 App\Entity\Ingredient:
     ingredient_sauce_tomate:
         name: 'Sauce tomate'
