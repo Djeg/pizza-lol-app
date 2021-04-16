@@ -11,7 +11,7 @@ Cloner ou télécharger le répertoire en zip. Ouvrez le répertoire avec votre
 Ouvrez un terminal et éxécutez la commande:
 
 ```bash
-$ sh bin/install
+sh bin/install
 ```
 
 Vous pouvez avoir besoin de supprimer le fichier `composer.lock` afin que
