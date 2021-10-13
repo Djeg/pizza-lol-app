@@ -32,9 +32,9 @@ class HelloController
     }
 
     /**
-     * @Route("/bonjour/{param1}", name="app_hello_bonjour")
+     * @Route("/bonjour/{param1}/{param2}", name="app_hello_bonjour")
      */
-    public function bonjour(string $param1): Response
+    public function bonjour(string $param1, string $param2): Response
     {
         return new Response('Bonjour ' . $param1);
     }
