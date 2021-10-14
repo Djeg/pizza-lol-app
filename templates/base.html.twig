@@ -18,6 +18,17 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block menu %}
+                <nav>
+                    <a href="{{ path('app_home_home') }}">Accueil</a>
+                    <a href="{{ path('app_pizza_search') }}">Rechercher</a>
+                    <a href="{{ path('app_pizza_create') }}">Ajouter une pizza</a>
+                    <a href="{{ path('app_pizza_display', {id: 4}) }}">Afficher pizza</a>
+                </nav>
+            {% endblock %}
+        
+            {% block content %}{% endblock %}
+        {% endblock %}
     </body>
 </html>
