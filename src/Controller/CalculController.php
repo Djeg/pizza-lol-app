@@ -4,10 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CalculController
+/**
+ * 1. Créer un controller "HomeController"
+ * 
+ * 2. Hérité du AbstractController !
+ * 
+ * 3. Créer une méthode "home" avec la route "/"
+ * 
+ * 4. Créé et afficher son template
+ */
+
+class CalculController extends AbstractController
 {
     /**
      * @Route("/calcul/add/{a}/{b}", name="app_calcul_add")
@@ -16,7 +27,11 @@ class CalculController
     {
         $resultat = $a + $b;
 
-        return new Response('Le résultat est ' . $resultat);
+        return $this->render('calcul/add.html.twig', [
+            'a' => $a,
+            'b' => $b,
+            'resultat' => $resultat,
+        ]);
     }
 
     /**

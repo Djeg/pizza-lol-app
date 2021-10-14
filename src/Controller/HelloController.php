@@ -4,31 +4,29 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-/**
- * 1. Créer un controller : "CalculController"
- * 
- * 2. Ajouter un méthode "add" qui accépte
- *    2 paramètre de type int, qui les additiones,
- *    et qui retourne une réponse: "Resultat : {le resultat}"
- * 
- * 3. Ajouter une méthode "multiply" qui fait la
- *    multiplication
- * 
- * 4. Ajouter un méthode "subtract" qui fais la
- *   soustraction
- */
 
 class HelloController
 {
     /**
      * @Route("/hello", name="app_hello_hello")
      */
-    public function hello(): Response
+    public function hello(Request $request): Response
     {
-        return new Response('Bonjour tout le monde');
+        $response = new Response('<h1>Hello</h1>');
+
+        $response->headers->set('Powered-By', 'david');
+
+        $response->setStatusCode(404);
+
+        var_dump($request->getMethod());
+        var_dump($request->headers->get('User-Agent'));
+        var_dump($request->headers->get('Accept-Language'));
+        var_dump($request->query->get('test'));
+
+        return $response;
     }
 
     /**
