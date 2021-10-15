@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-// use App\Entity\Pizza;
+use App\Entity\Pizza;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,12 +17,12 @@ class HomeController extends AbstractController
      */
     public function home(): Response
     {
-        // $repository = $this->getDoctrine()->getRepository(Pizza::class);
+        $repository = $this->getDoctrine()->getRepository(Pizza::class);
 
-        // pizzas = $repository->findAll();
+        $pizzas = $repository->findAll();
 
         return $this->render('home/home.html.twig', [
-            // 'pizzas' => $pizzas,
+            'pizzas' => $pizzas,
         ]);
     }
 }
