@@ -2,4 +2,26 @@
 
 {% block content %}
     <h1>Nouvelle pizza</h1>
+
+    <form>
+        <div>
+            <label for="name">Nom de la pizza :</label>
+            <input type="text" id="name" name="name" />
+        </div>
+        <div>
+            <label for="description">Description de la pizza :</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+        <div>
+            <label for="price">Prix de la pizza :</label>
+            <input type="text" id="price" name="price" />
+        </div>
+        <div>
+            <label for="image">Image de la pizza :</label>
+            <input type="text" id="image" name="image" />
+        </div>
+        <div>
+            <button>Envoyer</button>
+        </div>
+    </form>
 {% endblock %}
