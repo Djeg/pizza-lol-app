@@ -33,4 +33,19 @@ cd ..
 
 # Créer une application symfony
 symfony new leNomDuRepertoireDuProjet --full
+
+# Lancer le server symfony
+symfony server:start
+
+# Créer une base de données
+symfony console doctrine:database:create
+
+# Supprimer une base de données
+symfony console doctrine:database:drop --force
+
+# Générer une entité
+symfony console make:entity
+
+# Mettrre à jour les tables de la BDD
+symfony console doctrine:schema:update --force
 ```
