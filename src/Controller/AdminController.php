@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Author;
 use App\Entity\BookKind;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -88,4 +89,81 @@ class AdminController extends AbstractController
             'kind' => $kind,
         ]);
     }
+
+    /**
+     * @Route("/admin/authors", name="app_admin_listAuthor")
+     */
+    public function listAuthors(): Response
+    {
+        $authors = $this
+            ->getDoctrine()
+            ->getRepository(Author::class)
+            ->findAll();
+
+        return $this->render('admin/listAuthors.html.twig', [
+            'authors' => $authors,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/authors/new", name="app_admin_newAuthor")
+     */
+    public function newAuthor(Request $request): Response
+    {
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $author = (new BookKind())
+                ->setName($request->request->get('name'));
+
+            $manager = $this->getDoctrine()->getManager();
+
+            $manager->persist($author);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_newAuthor');
+        }
+
+        return $this->render('admin/newAuthor.html.twig');
+    }
+
+    /**
+     * @Route("/admin/kinds/{id}", name="app_admin_modifyBookKind")
+     */
+    //public function modifyBookKind(BookKind $kind, Request $request): Response
+    //{
+    //    $success = false;
+
+    //    if ($request->isMethod(Request::METHOD_POST)) {
+    //        $kind->setName($request->request->get('name'));
+
+    //        $manager = $this->getDoctrine()->getManager();
+
+    //        $manager->persist($kind);
+
+    //        $manager->flush();
+
+    //        $success = true;
+    //    }
+
+    //    return $this->render('admin/modifyBookKind.html.twig', [
+    //        'kind' => $kind,
+    //        'success' => $success,
+    //    ]);
+    //}
+
+    /**
+     * @Route("/admin/kinds/{id}/delete", name="app_admin_deleteBookKind")
+     */
+    //public function deleteBookKind(BookKind $kind): Response
+    //{
+    //    $manager = $this->getDoctrine()->getManager();
+
+    //    $manager->remove($kind);
+
+    //    $manager->flush();
+
+    //    return $this->render('admin/deleteBookKind.html.twig', [
+    //        'kind' => $kind,
+    //    ]);
+    //}
 }
