@@ -8,11 +8,13 @@ une e-commerce pour vendre des livres entre particulier.
 1. Télécharger et extraire le projet, ou bien
    utiliser `git clone`
 
-2. Configurer votre base de données dans le fichier
+2. Installer les dépendences avec `composer install`
+
+3. Configurer votre base de données dans le fichier
    `.env`
 
-3. Créer votre base de données : `symfony console doctrine:database:create`
+4. Créer votre base de données : `symfony console doctrine:database:create`
 
-4. Mettre en place le schéma : `symfony console doctrine:schema:update --force`
+5. Mettre en place le schéma : `symfony console doctrine:schema:update --force`
 
-5. Démarrer le server : `symfony console server:start`
+6. Démarrer le server : `symfony console server:start`
