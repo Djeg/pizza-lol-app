@@ -37,6 +37,12 @@ class Book
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=BookKind::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $kind;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Book
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getKind(): ?BookKind
+    {
+        return $this->kind;
+    }
+
+    public function setKind(?BookKind $kind): self
+    {
+        $this->kind = $kind;
 
         return $this;
     }
