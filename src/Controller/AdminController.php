@@ -6,7 +6,9 @@ namespace App\Controller;
 
 use App\Entity\BookKind;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
 {
@@ -15,29 +17,60 @@ class AdminController extends AbstractController
      */
     public function listBookKind(): Response
     {
-        // @TODO ajouter le vrai code
+        $kinds = $this
+            ->getDoctrine()
+            ->getRepository(BookKind::class)
+            ->findAll();
 
-        return new Response('@todo');
+        return $this->render('admin/listBookKind.html.twig', [
+            'kinds' => $kinds,
+        ]);
     }
 
     /**
      * @Route("/admin/kinds/new", name="app_admin_newBookKind")
      */
-    public function newBookKind(): Response
+    public function newBookKind(Request $request): Response
     {
-        // @TODO ajouter le vrai code
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $kind = (new BookKind())
+                ->setName($request->request->get('name'));
 
-        return new Response('@todo');
+            $manager = $this->getDoctrine()->getManager();
+
+            $manager->persist($kind);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_listBookKind');
+        }
+
+        return $this->render('admin/newBookKind.html.twig');
     }
 
     /**
      * @Route("/admin/kinds/{id}", name="app_admin_modifyBookKind")
      */
-    public function modifyBookKind(BookKind $kind): Response
+    public function modifyBookKind(BookKind $kind, Request $request): Response
     {
-        // @TODO ajouter le vrai code
+        $success = false;
 
-        return new Response('@todo');
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $kind->setName($request->request->get('name'));
+
+            $manager = $this->getDoctrine()->getManager();
+
+            $manager->persist($kind);
+
+            $manager->flush();
+
+            $success = true;
+        }
+
+        return $this->render('admin/modifyBookKind.html.twig', [
+            'kind' => $kind,
+            'success' => $success,
+        ]);
     }
 
     /**
@@ -45,8 +78,14 @@ class AdminController extends AbstractController
      */
     public function deleteBookKind(BookKind $kind): Response
     {
-        // @TODO ajouter le vrai code
+        $manager = $this->getDoctrine()->getManager();
 
-        return new Response('@todo');
+        $manager->remove($kind);
+
+        $manager->flush();
+
+        return $this->render('admin/deleteBookKind.html.twig', [
+            'kind' => $kind,
+        ]);
     }
 }

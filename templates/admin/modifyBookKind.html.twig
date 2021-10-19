@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <p>
+        <a href="{{ path('app_admin_listBookKind') }}">Retour à la liste</a>
+    </p>
+    
+    <form method="POST">
+        <div>
+            <label for="name">Nom du genre :</label>
+            <input type="text" id="name" name="name" value="{{ kind.name }}" />
+        </div>
+        <div>
+            <button type="submit">Modifier le genre</button>
+        </div>
+    </form>
+{% endblock %}
