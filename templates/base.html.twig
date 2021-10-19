@@ -14,6 +14,21 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block menu %}
+                <nav>
+                    <div>
+                        <a href="{{ path('app_frontend_home') }}">Accueil</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_frontend_search') }}">Rechercher</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_frontend_newBook') }}">Ajouter un livre</a>
+                    </div>
+                </nav> 
+            {% endblock %} 
+            {% block content %}{% endblock %} 
+        {% endblock %}
     </body>
 </html>
