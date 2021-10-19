@@ -1,20 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<h1>Liste des genres</h1>
-<p>
-    <a href="{{ path('app_admin_newBookKind') }}">Créer un genre</a>
-</p>
 
-{% for kind in kinds %}
-    <div>
-        <p>{{ kind.name }}</p>
-        <p>
-            <a href="{{ path('app_admin_modifyBookKind', {id: kind.id}) }}">Modifier</a>
-            <br />
-            <a href="{{ path('app_admin_deleteBookKind', {id: kind.id}) }}">Supprimer</a>
-        </p>
-    </div>
-{% endfor %}
+{% include 'partials/list.html.twig' with {
+    entities: entities,
+    title: 'Liste des genres',
+    newUrl: path('app_admin_listBookKind'),
+    newLabel: 'Créer un genre',
+    displayProp: 'name',
+    modifyRouteName: 'app_admin_modifyBookKind',
+    deleteRouteName: 'app_admin_deleteBookKind',
+} %}
 
 {% endblock %}

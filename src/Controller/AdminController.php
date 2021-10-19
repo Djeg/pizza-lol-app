@@ -18,14 +18,7 @@ class AdminController extends AbstractController
      */
     public function listBookKind(): Response
     {
-        $kinds = $this
-            ->getDoctrine()
-            ->getRepository(BookKind::class)
-            ->findAll();
-
-        return $this->render('admin/listBookKind.html.twig', [
-            'kinds' => $kinds,
-        ]);
+        return $this->list(BookKind::class, 'listBookKind');
     }
 
     /**
@@ -95,14 +88,7 @@ class AdminController extends AbstractController
      */
     public function listAuthors(): Response
     {
-        $authors = $this
-            ->getDoctrine()
-            ->getRepository(Author::class)
-            ->findAll();
-
-        return $this->render('admin/listAuthors.html.twig', [
-            'authors' => $authors,
-        ]);
+        return $this->list(Author::class, 'listAuthors');
     }
 
     /**
@@ -166,4 +152,20 @@ class AdminController extends AbstractController
     //        'kind' => $kind,
     //    ]);
     //}
+
+
+    /**
+     * Liste une entité
+     */
+    private function list(string $className, string $templateName): Response
+    {
+        $entities = $this
+            ->getDoctrine()
+            ->getRepository($className)
+            ->findAll();
+
+        return $this->render('admin/' . $templateName . '.html.twig', [
+            'entities' => $entities,
+        ]);
+    }
 }

@@ -1,0 +1,16 @@
+<h1>{{ title }}</h1>
+
+<p>
+    <a href="{{ newUrl }}">{{ newLabel }}</a>
+</p>
+
+{% for entity in entities %}
+    <div>
+        <p>{{ attribute(entity, displayProp) }}</p>
+        <p>
+            <a href="{{ path(modifyRouteName, {id: entity.id}) }}">Modifier</a>
+            <br />
+            <a href="{{ path(deleteRouteName, {id: entity.id}) }}">Supprimer</a>
+        </p>
+    </div>
+{% endfor %}

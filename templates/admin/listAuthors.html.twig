@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+{% include 'partials/list.html.twig' with {
+    entities: entities,
+    title: 'Liste des auteurs',
+    newUrl: path('app_admin_listAuthor'),
+    newLabel: 'Créer un auteur',
+    displayProp: 'name',
+    modifyRouteName: 'app_admin_modifyAuthor',
+    deleteRouteName: 'app_admin_deleteAuthor',
+} %}
+
+{% endblock %}
