@@ -1,16 +1,24 @@
-<h1>{{ title }}</h1>
+<h1>{% block title '' %}</h1>
 
 <p>
-    <a href="{{ newUrl }}">{{ newLabel }}</a>
+    {% block createLink %}
+        <a href="{{ newUrl }}">{{ newLabel }}</a>
+    {% endblock %}
 </p>
 
 {% for entity in entities %}
     <div>
-        <p>{{ attribute(entity, displayProp) }}</p>
+        {% block displayBlock %}
+            <p>{{ attribute(entity, displayProp) }}</p>
+        {% endblock %}
         <p>
-            <a href="{{ path(modifyRouteName, {id: entity.id}) }}">Modifier</a>
+            {% block modifyLink %}
+                <a href="{{ path(modifyRouteName, {id: entity.id}) }}">Modifier</a>
+            {% endblock %}
             <br />
-            <a href="{{ path(deleteRouteName, {id: entity.id}) }}">Supprimer</a>
+            {% block deleteLink %}
+                <a href="{{ path(deleteRouteName, {id: entity.id}) }}">Supprimer</a>
+            {% endblock %}
         </p>
     </div>
 {% endfor %}

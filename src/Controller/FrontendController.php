@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,12 +58,12 @@ class FrontendController extends AbstractController
      */
     public function newBook(Request $request): Response
     {
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $book = (new Book())
-                ->setName($request->request->get('name'))
-                ->setDescription($request->request->get('description'))
-                ->setImage($request->request->get('image'))
-                ->setPrice((float)$request->request->get('price'));
+        $form = $this->createForm(BookType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $book = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
 
@@ -75,7 +76,9 @@ class FrontendController extends AbstractController
             ]);
         }
 
-        return $this->render('frontend/newBook.html.twig');
+        return $this->render('frontend/newBook.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

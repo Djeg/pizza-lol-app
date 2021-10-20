@@ -5,11 +5,11 @@
 {% include 'partials/list.html.twig' with {
     entities: entities,
     title: 'Liste des genres',
-    newUrl: path('app_admin_newBookKind'),
+    newUrl: path('app_admin_bookKind_new'),
     newLabel: 'Créer un genre',
     displayProp: 'name',
-    modifyRouteName: 'app_admin_modifyBookKind',
-    deleteRouteName: 'app_admin_deleteBookKind',
+    modifyRouteName: 'app_admin_bookKind_modify',
+    deleteRouteName: 'app_admin_bookKind_delete',
 } %}
 
 {% endblock %}
