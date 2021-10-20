@@ -123,29 +123,29 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/kinds/{id}", name="app_admin_modifyBookKind")
+     * @Route("/admin/authors/{id}", name="app_admin_modifyAuthor")
      */
-    //public function modifyBookKind(BookKind $kind, Request $request): Response
-    //{
-    //    $success = false;
+    public function modifyAuthor(Author $author, Request $request): Response
+    {
+        $success = false;
 
-    //    if ($request->isMethod(Request::METHOD_POST)) {
-    //        $kind->setName($request->request->get('name'));
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $author->setName($request->request->get('name'));
 
-    //        $manager = $this->getDoctrine()->getManager();
+            $manager = $this->getDoctrine()->getManager();
 
-    //        $manager->persist($kind);
+            $manager->persist($author);
 
-    //        $manager->flush();
+            $manager->flush();
 
-    //        $success = true;
-    //    }
+            $success = true;
+        }
 
-    //    return $this->render('admin/modifyBookKind.html.twig', [
-    //        'kind' => $kind,
-    //        'success' => $success,
-    //    ]);
-    //}
+        return $this->render('admin/modifyAuthor.html.twig', [
+            'kind' => $author,
+            'success' => $success,
+        ]);
+    }
 
     /**
      * @Route("/admin/kinds/{id}/delete", name="app_admin_deleteBookKind")
