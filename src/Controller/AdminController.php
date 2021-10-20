@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Entity\BookKind;
+use App\Form\BookKindType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,9 +27,12 @@ class AdminController extends AbstractController
      */
     public function newBookKind(Request $request): Response
     {
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $kind = (new BookKind())
-                ->setName($request->request->get('name'));
+        $form = $this->createForm(BookKindType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $kind = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
 
@@ -39,7 +43,9 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_admin_listBookKind');
         }
 
-        return $this->render('admin/newBookKind.html.twig');
+        return $this->render('admin/newBookKind.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -48,9 +54,12 @@ class AdminController extends AbstractController
     public function modifyBookKind(BookKind $kind, Request $request): Response
     {
         $success = false;
+        $form = $this->createForm(BookKindType::class, $kind);
 
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $kind->setName($request->request->get('name'));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $kind = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
 
@@ -64,6 +73,7 @@ class AdminController extends AbstractController
         return $this->render('admin/modifyBookKind.html.twig', [
             'kind' => $kind,
             'success' => $success,
+            'form' => $form->createView(),
         ]);
     }
 
