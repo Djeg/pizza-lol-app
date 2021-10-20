@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Entity\BookKind;
+use App\Form\AuthorType;
 use App\Form\BookKindType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -106,9 +107,12 @@ class AdminController extends AbstractController
      */
     public function newAuthor(Request $request): Response
     {
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $author = (new BookKind())
-                ->setName($request->request->get('name'));
+        $form = $this->createForm(AuthorType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $author = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
 
@@ -119,7 +123,9 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_admin_newAuthor');
         }
 
-        return $this->render('admin/newAuthor.html.twig');
+        return $this->render('admin/newAuthor.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -127,10 +133,14 @@ class AdminController extends AbstractController
      */
     public function modifyAuthor(Author $author, Request $request): Response
     {
+        $form = $this->createForm(AuthorType::class, $author);
+
         $success = false;
 
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $author->setName($request->request->get('name'));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $author = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
 
@@ -144,24 +154,25 @@ class AdminController extends AbstractController
         return $this->render('admin/modifyAuthor.html.twig', [
             'kind' => $author,
             'success' => $success,
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/admin/kinds/{id}/delete", name="app_admin_deleteBookKind")
+     * @Route("/admin/authors/{id}/delete", name="app_admin_deleteAuthor")
      */
-    //public function deleteBookKind(BookKind $kind): Response
-    //{
-    //    $manager = $this->getDoctrine()->getManager();
+    public function deleteAuthor(Author $author): Response
+    {
+        $manager = $this->getDoctrine()->getManager();
 
-    //    $manager->remove($kind);
+        $manager->remove($author);
 
-    //    $manager->flush();
+        $manager->flush();
 
-    //    return $this->render('admin/deleteBookKind.html.twig', [
-    //        'kind' => $kind,
-    //    ]);
-    //}
+        return $this->render('admin/deleteAuthor.html.twig', [
+            'author' => $author,
+        ]);
+    }
 
 
     /**
