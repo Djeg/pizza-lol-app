@@ -19,6 +19,28 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    //public function findFiveOrderByName(string $name)
+    //{
+    //    // Création d'un query builder dont le rôle
+    //    // est de rechercher des entités en utilisant
+    //    // un syntax proche de SQL.
+    //    $queryBuilder = $this
+    //        ->createQueryBuilder('book')
+    //        ->andWhere('book.name LIKE :name')
+    //        ->setParameter('name', '%' . $name . '%')
+    //        ->orderBy('book.name', 'ASC')
+    //        ->setMaxResults(5);
+
+    //    // Nous créons la requête SQL qui correspond
+    //    // à notre query builder plus haut.
+    //    $query = $queryBuilder->getQuery();
+
+    //    // Nous retournons les livres (book) qui match
+    //    // notre requête
+    //    return $query->getResult();
+    //}
+
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

@@ -18,6 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontendController extends AbstractController
 {
     /**
+     * Récupérer les 20 premiers livres ordonées par date de création.
+     * Ajouter la possibilité de données la page en query string ($request->query->get('page')).
+     * 
      * @Route("/", name="app_frontend_home")
      */
     public function home(): Response
@@ -32,6 +35,10 @@ class FrontendController extends AbstractController
     }
 
     /**
+     * Récupérer uniquement 20 résultats max.
+     * Ajouter la possiblité d'ordonnées par date de création, par nom et par id.
+     * Ajouter la possibilité de rechercher par tranche de prix.
+     * 
      * @Route("/rechercher", name="app_frontend_search")
      */
     public function search(Request $request): Response
