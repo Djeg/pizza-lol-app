@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\BookSearchCriteria;
 use App\Entity\Book;
+use App\Form\BookSearchCriteriaType;
 use App\Form\BookType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,11 +26,13 @@ class FrontendController extends AbstractController
      * 
      * @Route("/", name="app_frontend_home")
      */
-    public function home(): Response
+    public function home(Request $request): Response
     {
         $repository = $this->getDoctrine()->getRepository(Book::class);
 
-        $books = $repository->findAll();
+        $page = (int)$request->query->get('page', 1);
+
+        $books = $repository->findAllOrderedByDate(25, $page);
 
         return $this->render('frontend/home.html.twig', [
             'books' => $books,
@@ -43,20 +48,19 @@ class FrontendController extends AbstractController
      */
     public function search(Request $request): Response
     {
-        $name = $request->query->get('name');
+        $form = $this->createForm(BookSearchCriteriaType::class, new BookSearchCriteria());
+
+        $form->handleRequest($request);
+
+        $criterias = $form->getData();
 
         $repository = $this->getDoctrine()->getRepository(Book::class);
 
-        if (empty($name)) {
-            $books = $repository->findAll();
-        } else {
-            $books = $repository->findBy([
-                'name' => $name,
-            ]);
-        }
+        $books = $repository->findAllBySearchCriterias($criterias);
 
         return $this->render('frontend/search.html.twig', [
             'books' => $books,
+            'form' => $form->createView(),
         ]);
     }
 

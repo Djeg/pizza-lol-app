@@ -8,7 +8,9 @@
     {% endblock %}
 
     {% block createLink %}
-        <a href="{{ path('app_admin_author_new') }}">Ajouter un auteur</a>
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('app_admin_author_new') }}">Ajouter un auteur</a>
+        {% endif %}
     {% endblock %}
 
     {% block displayBlock %}

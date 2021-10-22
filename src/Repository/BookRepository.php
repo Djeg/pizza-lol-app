@@ -2,9 +2,13 @@
 
 namespace App\Repository;
 
+use App\DTO\BookSearchCriteria;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +21,46 @@ class BookRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Book::class);
+    }
+
+    public function findAllOrderedByDate(int $limit = 20, int $page = 1)
+    {
+        return $this
+            ->createQueryBuilder('book') // QueryBuilder
+            ->orderBy('book.createdAt', 'ASC') // QueryBuilder
+            ->setMaxResults($limit) // QueryBuilder
+            ->setFirstResult(($page - 1) * $limit) // QueryBuilder
+            ->getQuery() // Query
+            ->getResult(); // Book[]
+    }
+
+    public function findAllBySearchCriterias(BookSearchCriteria $criterias)
+    {
+        $queryBuilder = $this // BookRepository
+            ->createQueryBuilder('book') // QueryBuilder
+            ->setMaxResults($criterias->limit) // QueryBuilder
+            ->setFirstResult(($criterias->page - 1) * $criterias->limit)
+            ->orderBy('book.' . $criterias->orderBy, $criterias->direction); // QueryBuilder
+
+        if ($criterias->name) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('book.name LIKE :name')
+                ->setParameter('name', '%' . $criterias->name . '%');
+        }
+
+        if ($criterias->startingPrice !== null) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('book.price >= :startingPrice')
+                ->setParameter('startingPrice', $criterias->startingPrice);
+        }
+
+        if ($criterias->endingPrice !== null) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('book.price <= :endingPrice')
+                ->setParameter('endingPrice', $criterias->endingPrice);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     //public function findFiveOrderByName(string $name)

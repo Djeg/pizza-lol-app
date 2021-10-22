@@ -17,4 +17,6 @@ une e-commerce pour vendre des livres entre particulier.
 
 5. Mettre en place le schéma : `symfony console doctrine:schema:update --force`
 
-6. Démarrer le server : `symfony console server:start`
+6. Installer les fixtures dans la base de données : `symfony console hautelook:fixtures:load`
+
+7. Démarrer le server : `symfony console server:start`

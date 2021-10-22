@@ -10,6 +10,7 @@ use App\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AuthorController extends BaseController
 {
@@ -23,9 +24,14 @@ class AuthorController extends BaseController
 
     /**
      * @Route("/admin/authors/new", name="app_admin_author_new")
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
+
+
+
         return $this->createOrModifyEntity(AuthorType::class, $request, 'author');
     }
 

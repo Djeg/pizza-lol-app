@@ -16,6 +16,9 @@
     <body>
         {% block body %}
             {% block menu %}
+                {% if app.user %}
+                    <p>{{ app.user.email }}</p>
+                {% endif %}
                 <nav>
                     <div>
                         <a href="{{ path('app_frontend_home') }}">Accueil</a>

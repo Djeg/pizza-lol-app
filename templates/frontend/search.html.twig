@@ -1,15 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<form>
-    <div>
-        <label for="name">Rechercher par nom :</label>
-        <input type="search" id="name" name="name" value="{{ app.request.query.get('name') }}" />
-    </div>
-    <div>
-        <button>Rechercher</button>
-    </div>
-</form>
+
+{{ form(form) }}
 
 
 {% if books is empty %}
