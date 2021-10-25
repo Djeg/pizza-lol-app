@@ -1,0 +1,16 @@
+App\Entity\User:
+  user:
+    email: user@mail.com
+    firstname: user
+    lastname: user
+    roles: [ROLE_USER]
+    # password: user
+    password: '\$2y\$13\$ujWE83tQiPEXVq79xuvgk.gUjAE5eko0ldSECWH.te4c/ZWY7ATuG'
+
+  admin:
+    email: admin@mail.com
+    firstname: admin
+    lastname: admin
+    roles: [ROLE_ADMIN]
+    # password: admin
+    password: '\$2y\$13\$ou2.o1UCrUOaUxoik0zpnOnha.7ik0Exc3EWVPpjmdXtgwHbML2U2'

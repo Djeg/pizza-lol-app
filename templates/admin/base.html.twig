@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block menu %}
+    {% include 'partials/admin_menu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+    {% if app.request.query.get('success') %}
+        <div class="app--success-flash">
+            <p>{{ app.request.query.get('success') }}
+        </div>
+    {% endif %}
+
+    {% if app.request.query.get('error') %}
+        <div class="app--error-flash">
+            <p>{{ app.request.query.get('error') }}
+        </div>
+    {% endif %}
+
+    {% if app.request.query.get('warning') %}
+        <div class="app--warning-flash">
+            <p>{{ app.request.query.get('warning') }}
+        </div>
+    {% endif %}
+
+    <h1>{% block pageTitle '' %}</h1>
+
+    {% block pageContent '' %}
+{% endblock %}

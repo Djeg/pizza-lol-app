@@ -1,0 +1,151 @@
+:root {
+    --black: #303036;
+    --grey: #918b92;
+    --light-grey: #ebeaeb;
+    --red: #9c0d38;
+    --pink: #ce5374;
+    --mauve: #dbbbf5;
+    --light-blue: #dbbbf5;
+    --blue: #634da0;
+    --green: #009b72;
+    --yellow: #c88304;
+    --white: #fbfffe;
+    --mg: 0.8rem;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: var(--light-grey);
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+}
+
+/*
+=== Header & Menu ===
+*/
+
+.app--header {
+    width: 100%;
+    min-height: 80px;
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    align-items: stretch;
+}
+
+.app--menu {
+    display: flex;
+    align-items: stretch;
+}
+
+.app--menu--item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.app--menu--item a {
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 0px var(--mg);
+    font-weight: 600;
+}
+
+.app--menu--item a:hover {
+    background-color: var(--grey);
+    color: var(--black);
+}
+
+/*
+=== CONTENT ===
+*/
+
+.app--content {
+    min-width: 80%;
+    flex-grow: 2;
+}
+
+/*
+=== FOOTER ===
+*/
+.app--footer {
+    width: 100%;
+    min-height: 250px;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+/*
+=== Typographie ===
+*/
+a {
+    text-decoration: none;
+    color: var(--blue);
+}
+
+/*
+=== Flash message ===
+*/
+.app--error-flash {
+    padding: var(--mg);
+    background-color: var(--red);
+    color: var(--white);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    font-weight: 600;
+    margin: var(--mg) 0;
+    border-radius: 5px;
+}
+
+.app--warning-flash {
+    padding: var(--mg);
+    background-color: var(--yellow);
+    color: var(--white);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    font-weight: 600;
+    margin: var(--mg) 0;
+    border-radius: 5px;
+}
+
+.app--success-flash {
+    padding: var(--mg);
+    background-color: var(--green);
+    color: var(--white);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    font-weight: 600;
+    margin: var(--mg) 0;
+    border-radius: 5px;
+}

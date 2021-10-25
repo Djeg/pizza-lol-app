@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block pageTitle 'Liste des utilisateurs' %}
+
+{% block pageContent %}
+<p>
+    <a href="{{ path('app_admin_user_create') }}">Créer un utilisateur</a>
+</p>
+
+{% for user in users %}
+    <div>
+        <p>{{ user.email }} ({{ user.roles[0] }})</p>
+
+        <p>
+        <a href="{{ path('app_admin_user_update', {id: user.id}) }}">Modifier</a>
+        <br/>
+        <a href="{{ path('app_admin_user_delete', {id: user.id}) }}">Supprimer</a>
+        </p>
+    </div>
+{% endfor %}
+{% endblock %}
