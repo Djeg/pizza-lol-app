@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block pageTitle 'Liste des auteurs' %}
+
+{% block pageContent %}
+<p>
+    <a href="{{ path('app_admin_author_create') }}">Créer un auteur</a>
+</p>
+
+{% for author in authors %}
+    <div>
+        <p>{{ author.name }}</p>
+
+        <p>
+        <a href="{{ path('app_admin_author_update', {id: author.id}) }}">Modifier</a>
+        <br/>
+        <a href="{{ path('app_admin_author_delete', {id: author.id}) }}">Supprimer</a>
+        </p>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -51,3 +51,19 @@ App\Entity\Kind:
     kind9:
         name: "Politique & Philosophie"
         color: "#9df090"
+
+App\Entity\Author:
+    author1:
+        name: "J.K. Rowling"
+        description: L'auteur d'Harry Potter
+        images:
+            [
+                "https://www.biography.com/.image/t_share/MTE4MDAzNDEwMDgxNTE1MDIy/jk-rowling-40998-1-raw.jpg",
+            ]
+
+    author{2..10}:
+        name: <word()>
+        description: <text()>
+        images:
+            - <imageUrl(360, 360, 'animals', true, 'cats')>
+            - <imageUrl(360, 360, 'animals', true, 'cats')>
