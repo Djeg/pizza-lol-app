@@ -22,7 +22,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/users/nouveau', name: 'app_admin_user_create')]
+    #[Route('/admin/utilisateurs/nouveau', name: 'app_admin_user_create')]
     public function create(Request $request, UserPasswordHasherInterface $hasher): Response
     {
         $form = $this->createForm(UserType::class);
@@ -49,7 +49,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/users/{id}', name: 'app_admin_user_update')]
+    #[Route('/admin/utilisateurs/{id}', name: 'app_admin_user_update')]
     public function update(User $user, Request $request, UserPasswordHasherInterface $hasher): Response
     {
         $form = $this->createForm(UserType::class, $user, [
@@ -81,7 +81,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/users/{id}/supprimer', name: 'app_admin_user_delete')]
+    #[Route('/admin/utilisateurs/{id}/supprimer', name: 'app_admin_user_delete')]
     public function delete(User $user): Response
     {
         $manager = $this->getDoctrine()->getManager();

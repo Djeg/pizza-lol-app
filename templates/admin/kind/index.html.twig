@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block pageTitle 'Liste des genres' %}
+
+{% block pageContent %}
+<p>
+    <a href="{{ path('app_admin_kind_create') }}">Créer un genre</a>
+</p>
+
+{% for kind in kinds %}
+    <div>
+        <p>{{ kind.name }}</p>
+
+        <p>
+        <a href="{{ path('app_admin_kind_update', {id: kind.id}) }}">Modifier</a>
+        <br/>
+        <a href="{{ path('app_admin_kind_delete', {id: kind.id}) }}">Supprimer</a>
+        </p>
+    </div>
+{% endfor %}
+{% endblock %}
