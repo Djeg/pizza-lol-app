@@ -9,15 +9,17 @@ Un site de commerce de vente de livres.
 
 2. Ouvrir vscode à la racine du projet.
 
-3. Configurer votre base de données dans le fichier `.env`
+3. Installer les dépendances : `composer install`
 
-4. Créer la base de données avec la commande : `symfony console doctrine:database:create`
+4. Configurer votre base de données dans le fichier `.env`
 
-5. Créer le schéma avec la commande : `symfony console doctrine:schema:update --force`
+5. Créer la base de données avec la commande : `symfony console doctrine:database:create`
 
-6. Insérer les fixtures dans la base de données avec : `symfony console hautelook:fixtures:load`
+6. Créer le schéma avec la commande : `symfony console doctrine:schema:update --force`
 
-7. Démarer le server symfony : `symfony server:start`
+7. Insérer les fixtures dans la base de données avec : `symfony console hautelook:fixtures:load`
+
+8. Démarer le server symfony : `symfony server:start`
 
 ## Les fonctionalités
 
