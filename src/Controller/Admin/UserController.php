@@ -10,87 +10,35 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserController extends AbstractController
+class UserController extends CRUDController
 {
     #[Route('/admin/utilisateurs', name: 'app_admin_user_index')]
     public function index(): Response
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-
-        return $this->render('admin/user/index.html.twig', [
-            'users' => $users,
-        ]);
+        return $this->list('user', User::class, 'users');
     }
 
     #[Route('/admin/utilisateurs/nouveau', name: 'app_admin_user_create')]
-    public function create(Request $request, UserPasswordHasherInterface $hasher): Response
+    public function create(): Response
     {
-        $form = $this->createForm(UserType::class);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $user->setPassword($hasher->hashPassword($user, $user->getPassword()));
-
-            $manager = $this->getDoctrine()->getManager();
-
-            $manager->persist($user);
-
-            $manager->flush();
-
-            return $this->redirectToRoute('app_admin_user_index', [
-                'success' => "L'utilisateur {$user->getEmail()} à bien été créé",
-            ]);
-        }
-
-        return $this->render('admin/user/create.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->createOrUpdate('user', UserType::class, null, function (User $user) {
+            return "L'utilisateur {$user->getEmail()} à bien été créé";
+        });
     }
 
     #[Route('/admin/utilisateurs/{id}', name: 'app_admin_user_update')]
-    public function update(User $user, Request $request, UserPasswordHasherInterface $hasher): Response
+    public function update(User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user, [
-            'modify_mode' => true,
-        ]);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-
-            if ($form->get('password')->getData()) {
-                $user->setPassword($hasher->hashPassword($user, $user->getPassword()));
-            }
-
-            $manager = $this->getDoctrine()->getManager();
-
-            $manager->persist($user);
-
-            $manager->flush();
-
-            return $this->redirectToRoute('app_admin_user_index', [
-                'success' => "L'utilisateur {$user->getEmail()} à bien été mis à jour",
-            ]);
-        }
-
-        return $this->render('admin/user/update.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->createOrUpdate('user', UserType::class, $user, function (User $user) {
+            return "L'utilisateur {$user->getEmail()} à bien été mis à jour";
+        });
     }
 
     #[Route('/admin/utilisateurs/{id}/supprimer', name: 'app_admin_user_delete')]
     public function delete(User $user): Response
     {
-        $manager = $this->getDoctrine()->getManager();
-
-        $manager->remove($user);
-        $manager->flush();
-
-        return $this->redirectToRoute('app_admin_user_index', [
-            'success' => "L'utilisateur {$user->getEmail()} à bien été supprimé",
-        ]);
+        return $this->remove('user', $user, function (User $user) {
+            return "L'utilisateur {$user->getEmail()} à bien été supprimé";
+        });
     }
 }
