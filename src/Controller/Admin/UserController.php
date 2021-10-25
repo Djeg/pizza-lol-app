@@ -9,11 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordHasherEncoder;
 
 class UserController extends AbstractController
 {
-    #[Route('/admin/users', name: 'app_admin_user_index')]
+    #[Route('/admin/utilisateurs', name: 'app_admin_user_index')]
     public function index(): Response
     {
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
@@ -83,7 +82,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/admin/users/{id}/supprimer', name: 'app_admin_user_delete')]
-    public function delete(User $user, Request $request): Response
+    public function delete(User $user): Response
     {
         $manager = $this->getDoctrine()->getManager();
 
