@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'LibShop !' %}
+
+{% block content %}
+    <h2>Nos derniers livres</h2>
+
+    <div class="grid">
+        {% for book in books %}
+            <a href="#" class="grid--item grid--item--book">
+                <div class="img-container">
+                    <img src="{{ book.images[0] }}" alt="{{ book.title }}" />
+                </div>
+                <div class="info-container">
+                    <p class="book-title">
+                        {{ book.title }}
+                    </p>
+                    <p class="book-author">
+                        Par {{ book.author.name }}
+                    </p>
+                    <p class="book-price">
+                        {{ book.price }} €
+                    </p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <h2>Les auteurs célébre</h2>
+
+    <div class="grid grid--author">
+        {% for author in authors %}
+            <a href="#" class="grid--item grid--item--author">
+                <div class="img-container">
+                    <img src="{{ author.images[0] }}" alt="{{ author.name }}" />
+                </div>
+                <p class="name">{{ author.name }}</p>
+            </a>
+        {% endfor %}
+    </div>
+
+    <h2>Les genres</h3>
+
+    <div class="grid grid--kind">
+        {% for kind in kinds %}
+            <a href="#" class="grid--item grid--item--kind"  style="background-color: {{ kind.color }};">
+                <p>{{ kind.name }}</p>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
