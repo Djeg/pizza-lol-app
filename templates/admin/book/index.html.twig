@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block pageTitle 'Liste des livres' %}
+
+{% block pageContent %}
+<p>
+    <a href="{{ path('app_admin_book_create') }}">Créer un livre</a>
+</p>
+
+{% for book in books %}
+    <div>
+        <p>{{ book.title }}</p>
+
+        <p>
+        <a href="{{ path('app_admin_book_update', {id: book.id}) }}">Modifier</a>
+        <br/>
+        <a href="{{ path('app_admin_book_delete', {id: book.id}) }}">Supprimer</a>
+        </p>
+    </div>
+{% endfor %}
+{% endblock %}

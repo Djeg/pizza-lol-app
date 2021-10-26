@@ -3,9 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Author;
-use App\Entity\User;
 use App\Form\Admin\AuthorType;
-use App\Form\Admin\UserType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

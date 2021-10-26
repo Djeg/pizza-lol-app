@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block pageTitle 'Nouveau livre' %}
+
+{% block pageContent %}
+<p>
+    <a href="{{ path('app_admin_book_index') }}">Retour à la liste</a>
+</p>
+
+{{ form(form) }}
+
+{% endblock %}

@@ -2,16 +2,14 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\AuthorRepository;
+use App\Repository\BookRepository;
 use Gedmo\Mapping\Annotation\Timestampable;
 
 /**
- * @ORM\Entity(repositoryClass=AuthorRepository::class)
+ * @ORM\Entity(repositoryClass=BookRepository::class)
  */
-class Author
+class Book
 {
     /**
      * @ORM\Id
@@ -23,7 +21,7 @@ class Author
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
@@ -34,6 +32,18 @@ class Author
      * @ORM\Column(type="array")
      */
     private $images = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Kind::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $kind;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -48,28 +58,23 @@ class Author
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="author", orphanRemoval=true)
+     * @ORM\Column(type="float")
      */
-    private $books;
-
-    public function __construct()
-    {
-        $this->books = new ArrayCollection();
-    }
+    private $price;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
@@ -98,6 +103,30 @@ class Author
         return $this;
     }
 
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getKind(): ?Kind
+    {
+        return $this->kind;
+    }
+
+    public function setKind(?Kind $kind): self
+    {
+        $this->kind = $kind;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -122,32 +151,14 @@ class Author
         return $this;
     }
 
-    /**
-     * @return Collection|Book[]
-     */
-    public function getBooks(): Collection
+    public function getPrice(): ?float
     {
-        return $this->books;
+        return $this->price;
     }
 
-    public function addBook(Book $book): self
+    public function setPrice(float $price): self
     {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBook(Book $book): self
-    {
-        if ($this->books->removeElement($book)) {
-            // set the owning side to null (unless already changed)
-            if ($book->getAuthor() === $this) {
-                $book->setAuthor(null);
-            }
-        }
+        $this->price = $price;
 
         return $this;
     }

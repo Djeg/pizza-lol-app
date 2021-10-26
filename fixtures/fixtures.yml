@@ -52,6 +52,10 @@ App\Entity\Kind:
         name: "Politique & Philosophie"
         color: "#9df090"
 
+    kind10:
+        name: "Fantaisie"
+        color: "#8ffff4"
+
 App\Entity\Author:
     author1:
         name: "J.K. Rowling"
@@ -65,5 +69,45 @@ App\Entity\Author:
         name: <word()>
         description: <text()>
         images:
-            - <imageUrl(360, 360, 'animals', true, 'cats')>
-            - <imageUrl(360, 360, 'animals', true, 'cats')>
+            - <imageUrl(360, 360, 'auteur', true)>
+            - <imageUrl(360, 360, 'auteur', true)>
+
+App\Entity\Book:
+    book1:
+        title: "Harry Potter - L'école des sorciers (Tome 1)"
+        description: De toutes nouvelles couvertures pour la saga de J.K. Rowling en Folio Junior.
+        price: 8.9
+        images:
+            - https://static.fnac-static.com/multimedia/Images/FR/NR/ba/d8/1d/1956026/1540-1/tsp20210914073213/Harry-Potter-a-l-ecole-des-sorciers.jpg
+            - https://static.fnac-static.com/multimedia/Images/FR/NR/ba/d8/1d/1956026/1542-1/tsp20171009131247/Harry-Potter-a-l-ecole-des-sorciers.jpg
+        author: "@author1"
+        kind: "@kind10"
+
+    book2:
+        title: "Harry Potter - La chambre des secrets (Tome 2)"
+        description: De toutes nouvelles couvertures pour la saga de J.K. Rowling en Folio Junior.
+        price: 8.9
+        images:
+            - https://static.fnac-static.com/multimedia/Images/FR/NR/d3/c9/cf/13617619/1540-1/tsp20210920180322/Harry-Potter-et-la-chambre-des-secrets.jpg
+        author: "@author1"
+        kind: "@kind10"
+
+    book3:
+        title: "Harry Potter - Le prisonier d'askaban (Tome 3)"
+        description: De toutes nouvelles couvertures pour la saga de J.K. Rowling en Folio Junior.
+        price: 8.9
+        images:
+            - https://static.fnac-static.com/multimedia/Images/FR/NR/c0/d8/1d/1956032/1540-1/tsp20210914072148/Harry-Potter-et-le-prisonnier-d-Azkaban.jpg
+            - https://static.fnac-static.com/multimedia/Images/FR/NR/c0/d8/1d/1956032/1510-1/tsp20171009131247/Harry-Potter-et-le-prisonnier-d-Azkaban.jpg
+        author: "@author1"
+        kind: "@kind10"
+
+    book{4..50}:
+        title: <sentence()>
+        description: <text()>
+        price: 9.9
+        images:
+            - <imageUrl(360, 360, '1er de couverture', true)>
+            - <imageUrl(360, 360, '4eme de couverture', true)>
+        author: "@author*"
+        kind: "@kind*"
