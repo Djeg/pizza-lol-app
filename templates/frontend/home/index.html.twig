@@ -7,7 +7,7 @@
 
     <div class="grid">
         {% for book in books %}
-            <a href="#" class="grid--item grid--item--book">
+            <a href="{{ path('app_frontend_book_display', {id: book.id}) }}" class="grid--item grid--item--book">
                 <div class="img-container">
                     <img src="{{ book.images[0] }}" alt="{{ book.title }}" />
                 </div>
@@ -30,7 +30,7 @@
 
     <div class="grid grid--author">
         {% for author in authors %}
-            <a href="#" class="grid--item grid--item--author">
+            <a href="{{ path('app_frontend_author_display', {id: author.id}) }}" class="grid--item grid--item--author">
                 <div class="img-container">
                     <img src="{{ author.images[0] }}" alt="{{ author.name }}" />
                 </div>
