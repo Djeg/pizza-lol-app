@@ -43,7 +43,7 @@
 
     <div class="grid grid--kind">
         {% for kind in kinds %}
-            <a href="#" class="grid--item grid--item--kind"  style="background-color: {{ kind.color }};">
+            <a href="{{ path('app_frontend_book_search', {kinds: [kind.id]}) }}" class="grid--item grid--item--kind"  style="background-color: {{ kind.color }};">
                 <p>{{ kind.name }}</p>
             </a>
         {% endfor %}
