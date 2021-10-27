@@ -1,0 +1,25 @@
+<a href="{{ path('app_frontend_book_display', {id: book.id}) }}" class="grid--item grid--item--book">
+    <div class="img-container">
+        <img src="{{ book.images[0] }}" alt="{{ book.title }}" />
+    </div>
+    <div class="info-container">
+        <p class="book-title">
+            {{ book.title }}
+        </p>
+        <p class="book-author">
+            Par {{ book.author.name }}
+        </p>
+        <p class="book-price">
+            {{ book.price }} €
+        </p>
+        {% if app.user %}
+            <p class="book-basket">
+                {% if app.user.basket.hasBook(book) %}
+                    <button data-href="{{ path('app_frontend_basket_remove', {id: book.id}) }}" onClick="handleButtonLink(event);">Enlever du panier</button>
+                {% else %}
+                    <button data-href="{{ path('app_frontend_basket_add', {id: book.id}) }}" onClick="handleButtonLink(event);">Ajouter au panier</button>
+                {% endif %}
+            </p>
+        {% endif %}
+    </div>
+</a>

@@ -14,6 +14,7 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script src="{{ asset('js/main.js') }}"></script>
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
@@ -22,7 +23,35 @@
             {% block header %} 
                 <header class="app--header">
                     <nav class="app--menu">
-                        {% block menu '' %}
+                        {% block menu %}
+                            <div class="app--menu--item">
+                                <a href="{{ path('app_frontend_home_index') }}">
+                                    Accueil
+                                </a>
+                            </div>
+
+                            <div class="app--menu--item">
+                                <a href="{{ path('app_frontend_book_search') }}" class="app--menu--item">
+                                    Rechercher
+                                </a>
+                            </div>
+
+                            {% if app.user %}
+                                <div class="app--menu--item">
+                                    <a href="{{ path('app_frontend_basket_index') }}" class="app--menu--item">
+                                        Panier ({{ app.user.basket.books|length }})
+                                    </a>
+                                </div>
+                            {% endif %}
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="app--menu--item">
+                                    <a href="{{ path('app_admin_book_list') }}" class="app--menu--item">
+                                        Administration
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endblock %}
                     </nav>
                 </header>
             {% endblock %}

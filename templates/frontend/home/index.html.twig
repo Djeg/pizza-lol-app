@@ -7,22 +7,7 @@
 
     <div class="grid">
         {% for book in books %}
-            <a href="{{ path('app_frontend_book_display', {id: book.id}) }}" class="grid--item grid--item--book">
-                <div class="img-container">
-                    <img src="{{ book.images[0] }}" alt="{{ book.title }}" />
-                </div>
-                <div class="info-container">
-                    <p class="book-title">
-                        {{ book.title }}
-                    </p>
-                    <p class="book-author">
-                        Par {{ book.author.name }}
-                    </p>
-                    <p class="book-price">
-                        {{ book.price }} €
-                    </p>
-                </div>
-            </a>
+            {% include 'partials/book_card.html.twig' %}
         {% endfor %}
     </div>
 

@@ -9,6 +9,10 @@
 
 <h1>{{ book.title }}</h1>
 
+<p>
+    <a href="{{ path('app_frontend_basket_add', {id: book.id}) }}">Ajouter au panier</a>
+</p>
+
 <div>
     <img src="{{ book.images[0] }}" alt="{{ book.title }}" />
 </div>
