@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LibShop - Votre panier{% endblock %}
+
+{% block content %}
+
+<h2>Paiment :</h2>
+
+<h3>Prix à payer : {{ app.user.basket.totalPrice }} €</h3>
+
+
+<h3>Carte bleu :</h3>
+{{ form(form) }}
+
+
+{% endblock %}

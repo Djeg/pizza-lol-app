@@ -4,6 +4,8 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Book;
 use App\Controller\BaseController;
+use App\Entity\Order;
+use App\Form\Frontend\CreditCardType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,5 +45,37 @@ class BasketController extends BaseController
         $this->persistAndFlush($basket);
 
         return new RedirectResponse($request->headers->get('referer', $this->generateUrl('app_frontend_home_index')));
+    }
+
+    #[Route('/panier/recapitulatif', name: 'app_frontend_basket_recap')]
+    #[IsGranted('ROLE_USER')]
+    public function recap(): Response
+    {
+        return $this->render('frontend/basket/recap.html.twig');
+    }
+
+    #[Route('/panier/paiement', name: 'app_frontend_basket_pay')]
+    #[IsGranted('ROLE_USER')]
+    public function pay(): Response
+    {
+        $form = $this->createAndHandleForm(CreditCardType::class);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $basket = $this->getUser()->getBasket();
+            $order = Order::createFrom($form->getData(), $basket);
+
+            $this->persist($order);
+            $this->persist($basket->empty());
+
+            $this->flush();
+
+            return $this->redirectToRoute('app_frontend_order_confirm', [
+                'id' => $order->getId(),
+            ]);
+        }
+
+        return $this->render('frontend/basket/pay.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

@@ -1,0 +1,14 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block pageTitle 'Liste des commandes' %}
+
+{% block pageContent %}
+{% for order in orders %}
+    <div>
+        <p>Par : {{ order.user.email }}</p>
+        <p>Montant : {{ order.price }}</p>
+        <p>Carte : {{ order.cardNumber }}</p>
+    </div>
+{% endfor %}
+{% endblock %}
+

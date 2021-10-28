@@ -42,6 +42,12 @@
                                         Panier ({{ app.user.basket.books|length }})
                                     </a>
                                 </div>
+
+                                <div class="app--menu--item">
+                                    <a href="{{ path('app_frontend_order_index') }}" class="app--menu--item">
+                                        Vos Commandes
+                                    </a>
+                                </div>
                             {% endif %}
 
                             {% if is_granted('ROLE_ADMIN') %}

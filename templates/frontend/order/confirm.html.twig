@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}LibShop - Votre panier{% endblock %}
+{% block title %}LibShop - Votre Commande{% endblock %}
 
 {% block content %}
 
-<h2>Votre panier</h2>
-
-{% if app.user.basket.books|length <= 0 %}
-
-<h3>Il n'y a pas encore de livres dans votre panier</h2>
-
-{% else %}
-
-<h3>Total : {{ app.user.basket.totalPrice }} €</h3>
+<h2>Recapitulatif de votre commande</h2>
 
 <p>
-    <a href="{{ path('app_frontend_basket_recap') }}">Valider et payer</a>
+    Merci d'avoir achété chez LibShop ! Votre commande à bien été
+    traité avec success :).
+    <br />
+    <a href="{{ path('app_frontend_home_index') }}">Retour à l'accueil</a>
 </p>
 
+<p>Montant de votre commande : {{ order.price }} €</p>
+<p>Fait le : {{ order.updatedAt|date('d/m/Y à H:i:s') }} €</p>
+
+<h3>Les livres :</h3>
+
 <div class="grid">
-    {% for book in app.user.basket.books %}
+    {% for book in order.books %}
         <a href="{{ path('app_frontend_book_display', {id: book.id}) }}" class="grid--item grid--item--book">
             <div class="img-container">
                 <img src="{{ book.images[0] }}" alt="{{ book.title }}" />
@@ -47,7 +47,5 @@
         </a>
     {% endfor %}
 </div>
-
-{% endif %}
 
 {% endblock %}

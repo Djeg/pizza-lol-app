@@ -4,19 +4,15 @@
 
 {% block content %}
 
-<h2>Votre panier</h2>
+<h2>Recapitulatif de votre paier</h2>
 
-{% if app.user.basket.books|length <= 0 %}
-
-<h3>Il n'y a pas encore de livres dans votre panier</h2>
-
-{% else %}
-
-<h3>Total : {{ app.user.basket.totalPrice }} €</h3>
+<h3>Prix à payer : {{ app.user.basket.totalPrice }} €</h3>
 
 <p>
-    <a href="{{ path('app_frontend_basket_recap') }}">Valider et payer</a>
+    <a href="{{ path('app_frontend_basket_pay') }}">Payer</a>
 </p>
+
+<h3>Votre commande :</h3>
 
 <div class="grid">
     {% for book in app.user.basket.books %}
@@ -47,7 +43,5 @@
         </a>
     {% endfor %}
 </div>
-
-{% endif %}
 
 {% endblock %}

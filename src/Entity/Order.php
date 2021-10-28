@@ -2,16 +2,18 @@
 
 namespace App\Entity;
 
+use App\DTO\CreditCard;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\BasketRepository;
+use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass=BasketRepository::class)
+ * @ORM\Entity(repositoryClass=OrderRepository::class)
+ * @ORM\Table(name="`order`")
  */
-class Basket
+class Order
 {
     /**
      * @ORM\Id
@@ -21,14 +23,25 @@ class Basket
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="basket", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
 
     /**
      * @ORM\ManyToMany(targetEntity=Book::class)
      */
     private $books;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cardNumber;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -41,6 +54,21 @@ class Basket
      * @Timestampable(on="update")
      */
     private $updatedAt;
+
+    public static function createFrom(CreditCard $card, Basket $basket): Order
+    {
+        $order = new Order();
+        $order
+            ->setCardNumber($card->number)
+            ->setUser($basket->getUser())
+            ->setPrice($basket->getTotalPrice());
+
+        foreach ($basket->getBooks() as $book) {
+            $order->addBook($book);
+        }
+
+        return $order;
+    }
 
     public function __construct()
     {
@@ -60,6 +88,18 @@ class Basket
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
@@ -88,9 +128,16 @@ class Basket
         return $this;
     }
 
-    public function hasBook(Book $book): bool
+    public function getCardNumber(): ?string
     {
-        return $this->books->contains($book);
+        return $this->cardNumber;
+    }
+
+    public function setCardNumber(string $cardNumber): self
+    {
+        $this->cardNumber = $cardNumber;
+
+        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -113,24 +160,6 @@ class Basket
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getTotalPrice(): float
-    {
-        $total = 0.0;
-
-        foreach ($this->books as $book) {
-            $total += $book->getPrice();
-        }
-
-        return $total;
-    }
-
-    public function empty(): self
-    {
-        $this->books = new ArrayCollection();
 
         return $this;
     }

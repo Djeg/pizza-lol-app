@@ -7,14 +7,40 @@ namespace App\Controller;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Kind;
+use App\Entity\Order;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use App\Repository\KindRepository;
+use App\Repository\OrderRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BaseController extends AbstractController
 {
+    /**
+     * Persist an entity
+     */
+    public function persist(object $data): self
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->persist($data);
+
+        return $this;
+    }
+
+    /**
+     * Flush all doctrine operations
+     */
+    public function flush(): self
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->flush();
+
+        return $this;
+    }
+
     /**
      * Persist and flush an entity
      */
@@ -77,5 +103,13 @@ class BaseController extends AbstractController
     public function getKindRepository(): KindRepository
     {
         return $this->getDoctrine()->getManager()->getRepository(Kind::class);
+    }
+
+    /**
+     * Retrieve the order repository
+     */
+    public function getOrderRepository(): OrderRepository
+    {
+        return $this->getDoctrine()->getManager()->getRepository(Order::class);
     }
 }
