@@ -204,4 +204,29 @@ class Book
 
         return $this;
     }
+
+    public function getNote(): float
+    {
+        $total = 0;
+        $n = 0;
+
+        foreach ($this->comments as $comment) {
+            if (null === $comment->getNote()) {
+                continue;
+            }
+
+            $total += $comment->getNote();
+            $n += 1;
+        }
+
+        if ($n === 0) {
+            return 0;
+        }
+
+        if ($n === 1) {
+            return $total;
+        }
+
+        return round($total / $n, 1);
+    }
 }

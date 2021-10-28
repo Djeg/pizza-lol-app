@@ -20,6 +20,7 @@
 <p>Autheur : {{ book.author.name }}</p>
 <p>Genre : {{ book.kind.name }}</p>
 <p>Prix : {{ book.price }} €</p>
+<p>Note : {{ book.note }} / 5 </p>
 
 
 <h2>Commentaires :</h2>
@@ -41,7 +42,7 @@
         Par : {{ comment.user.email }}
         <br />
         Le : {{ comment.updatedAt|date('d/m/Y à H:i:s') }}
-        {% if comment.note %}
+        {% if comment.note is not null %}
             <br />
             Note : {{ comment.note }} / 5
         {% endif %}
