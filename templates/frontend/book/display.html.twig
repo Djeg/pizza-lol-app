@@ -20,4 +20,33 @@
 <p>Autheur : {{ book.author.name }}</p>
 <p>Genre : {{ book.kind.name }}</p>
 <p>Prix : {{ book.price }} €</p>
+
+
+<h2>Commentaires :</h2>
+
+{% if book.comments|length <= 0 %}
+    <p>Il n'y a pas encore de commentaires pour ce livre</p>
+{% endif %}
+
+{% if app.user %}
+    <h4>Ajouter un commentaire :</h4>
+    {{ form(commentForm) }}
+{% else %}
+    <h4><a href="{{ path('app_login') }}">Connéctez vous afin de laisser un commentaire</a></h4>
+{% endif %}
+
+{% for comment in comments %}
+<div>
+    <p>
+        Par : {{ comment.user.email }}
+        <br />
+        Le : {{ comment.updatedAt|date('d/m/Y à H:i:s') }}
+        {% if comment.note %}
+            <br />
+            Note : {{ comment.note }} / 5
+        {% endif %}
+    </p>
+    <p>{{ comment.content }}</p>
+</div>
+{% endfor %}
 {% endblock %}

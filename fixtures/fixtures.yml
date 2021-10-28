@@ -111,3 +111,10 @@ App\Entity\Book:
             - <imageUrl(360, 360, '4eme de couverture', true)>
         author: "@author*"
         kind: "@kind*"
+
+App\Entity\Comment:
+    comment{0..100}:
+        note: <numberBetween(0, 5)>
+        content: <text()>
+        user: "@user"
+        book: "@book*"
