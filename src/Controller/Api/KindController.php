@@ -5,12 +5,14 @@ namespace App\Controller\Api;
 use App\Entity\Kind;
 use App\Form\Api\KindType;
 use App\Form\Api\SearchKindType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class KindController extends ApiController
 {
     #[Route('/api/kinds', name: 'app_api_kind_collection', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function collection(): Response
     {
         return $this->getCollection(SearchKindType::class, Kind::class);

@@ -5,7 +5,7 @@ App\Entity\User:
         lastname: user
         roles: [ROLE_USER]
         # password: user
-        password: '\$2y\$13\$ujWE83tQiPEXVq79xuvgk.gUjAE5eko0ldSECWH.te4c/ZWY7ATuG'
+        password: '\$2y\$13\$FoYHJ2UNtbP7/zvL2z3uE.hy/gnOD9cD3kkNxeDofGlv4x1t6U4FO'
 
     admin:
         email: admin@mail.com
