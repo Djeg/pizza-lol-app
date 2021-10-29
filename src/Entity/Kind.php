@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\KindRepository;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=KindRepository::class)
@@ -44,6 +45,7 @@ class Kind
 
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="kind")
+     * @Ignore()
      */
     private $books;
 
