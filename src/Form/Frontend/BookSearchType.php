@@ -89,6 +89,7 @@ class BookSearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BookSearchCriteria::class,
+            'data' => new BookSearchCriteria(),
             'method' => 'GET',
             'csrf_protection' => false,
         ]);

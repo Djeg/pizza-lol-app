@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -36,13 +37,13 @@ class Book
     private $images = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Kind::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Kind::class, inversedBy="books", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $kind;
@@ -66,6 +67,7 @@ class Book
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="book")
+     * @Ignore()
      */
     private $comments;
 

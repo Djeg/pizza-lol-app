@@ -65,6 +65,7 @@ class BookRepository extends ServiceEntityRepository
 
         if (null !== $criteria->author) {
             $builder = $builder
+                ->addSelect('author')
                 ->leftJoin('book.author', 'author')
                 ->andWhere('author.id = :author')
                 ->setParameter('author', $criteria->author->getId());
@@ -73,6 +74,7 @@ class BookRepository extends ServiceEntityRepository
 
         if (null !== $criteria->kinds && !$criteria->kinds->isEmpty()) {
             $builder = $builder
+                ->addSelect('kind')
                 ->leftJoin('book.kind',  'kind')
                 ->andWhere('kind.id IN (:kinds)')
                 ->setParameter('kinds', $criteria->kinds);

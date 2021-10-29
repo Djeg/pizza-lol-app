@@ -44,7 +44,7 @@ class Kind
     private $color;
 
     /**
-     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="kind")
+     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="kind", fetch="EAGER")
      * @Ignore()
      */
     private $books;
