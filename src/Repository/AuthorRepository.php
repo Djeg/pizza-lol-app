@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Author;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\DTO\AuthorSearchCriteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Author|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,6 +26,25 @@ class AuthorRepository extends ServiceEntityRepository
             ->createQueryBuilder('author')
             ->orderBy('author.updatedAt', 'DESC')
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllByCriteria(AuthorSearchCriteria $criteria): array
+    {
+        $queryBuilder = $this
+            ->createQueryBuilder('a')
+            ->orderBy('a.' . $criteria->orderBy, $criteria->direction)
+            ->setMaxResults($criteria->limit)
+            ->setFirstResult(($criteria->page - 1) * $criteria->limit);
+
+        if (null !== $criteria->name) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('a.name LIKE :name')
+                ->setParameter('name', '%' . $criteria->name . '%');
+        }
+
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }

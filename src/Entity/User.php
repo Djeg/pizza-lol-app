@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -35,6 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Ignore()
      */
     private $password;
 
@@ -62,16 +64,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToOne(targetEntity=Basket::class, mappedBy="user", cascade={"persist", "remove"})
+     * @Ignore()
      */
     private $basket;
 
     /**
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user", orphanRemoval=true)
+     * @Ignore()
      */
     private $orders;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * @Ignore()
      */
     private $comments;
 

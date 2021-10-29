@@ -39,7 +39,6 @@ class BookRepository extends ServiceEntityRepository
      */
     public function findAllByCriteria(BookSearchCriteria $criteria): array
     {
-        dump($criteria);
         $builder = $this
             ->createQueryBuilder('book')
             ->setMaxResults($criteria->limit)

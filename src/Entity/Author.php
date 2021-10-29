@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AuthorRepository;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=AuthorRepository::class)
@@ -49,6 +50,7 @@ class Author
 
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="author", orphanRemoval=true)
+     * @Ignore()
      */
     private $books;
 

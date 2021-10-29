@@ -4,85 +4,39 @@ namespace App\Controller\Api;
 
 use App\Entity\Kind;
 use App\Form\Api\KindType;
-use Symfony\Component\HttpFoundation\Request;
+use App\Form\Api\SearchKindType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class KindController extends AbstractController
+class KindController extends ApiController
 {
     #[Route('/api/kinds', name: 'app_api_kind_collection', methods: ['GET'])]
     public function collection(): Response
     {
-        $repository = $this->getDoctrine()->getRepository(Kind::class);
-
-        $kinds = $repository->findAll();
-
-        return $this->json($kinds);
+        return $this->getCollection(SearchKindType::class, Kind::class);
     }
 
     #[Route('/api/kinds/{id}', name: 'app_api_kind_document', methods: ['GET'])]
     public function document(Kind $kind): Response
     {
-        return $this->json($kind);
+        return $this->getDocument($kind);
     }
 
     #[Route('/api/kinds', name: 'app_api_kind_create', methods: ['POST'])]
-    public function create(Request $request): Response
+    public function create(): Response
     {
-        $form = $this->createForm(KindType::class);
-
-        $form->handleRequest($request);
-
-        $manager = $this->getDoctrine()->getManager();
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $kind = $form->getData();
-
-            $manager->persist($kind);
-            $manager->flush();
-
-            return $this->json($kind, 201);
-        }
-
-        return $this->json([
-            'errors' => $form->getErrors(),
-        ], 400);
+        return $this->createDocument(KindType::class);
     }
 
     #[Route('/api/kinds/{id}', name: 'app_api_kind_update', methods: ['PATCH'])]
-    public function update(Kind $kind, Request $request): Response
+    public function update(Kind $kind): Response
     {
-        $form = $this->createForm(KindType::class, $kind, [
-            'method' => 'PATCH',
-        ]);
-
-        $form->handleRequest($request);
-
-        $manager = $this->getDoctrine()->getManager();
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $kind = $form->getData();
-
-            $manager->persist($kind);
-            $manager->flush();
-
-            return $this->json($kind, 200);
-        }
-
-        return $this->json([
-            'errors' => $form->getErrors(),
-        ], 400);
+        return $this->updateDocument($kind, KindType::class);
     }
 
     #[Route('/api/kinds/{id}', name: 'app_api_kind_delete', methods: ['DELETE'])]
-    public function delete(Kind $kind, Request $request): Response
+    public function delete(Kind $kind): Response
     {
-        $manager = $this->getDoctrine()->getManager();
-
-        $manager->remove($kind);
-        $manager->flush();
-
-        return $this->json($kind);
+        return $this->deleteDocument($kind);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\UserSearchCriteria;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -34,6 +35,25 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    public function findAllByCriteria(UserSearchCriteria $criteria): array
+    {
+        $queryBuilder = $this
+            ->createQueryBuilder('u')
+            ->orderBy('u.' . $criteria->orderBy, $criteria->direction)
+            ->setMaxResults($criteria->limit)
+            ->setFirstResult(($criteria->page - 1) * $criteria->limit);
+
+        if (null !== $criteria->email) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('u.email LIKE :email')
+                ->setParameter('email', '%' . $criteria->email . '%');
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

@@ -13,9 +13,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class BookSearchCriteria
 {
-    public ?int $limit = 20;
-
-    public ?int $page = 1;
+    use PaginationCriteria;
+    use OrderableCriteria;
 
     public ?string $name = null;
 
@@ -26,8 +25,4 @@ class BookSearchCriteria
     public ?Author $author = null;
 
     public ?ArrayCollection $kinds = null;
-
-    public ?string $orderBy = 'updatedAt';
-
-    public ?string $direction = 'DESC';
 }
