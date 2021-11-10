@@ -1,0 +1,9 @@
+GET https://localhost:8001/home
+Content-Type: text/html
+
+### 
+
+POST https://127.0.0.1:8001/home
+Content-Type: application/x-www-form-urlencoded
+
+article_search[search]=plop&article_search[orderBy]=id

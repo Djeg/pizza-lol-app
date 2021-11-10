@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+
+{% block body %}
+    <h1>Create new Article</h1>
+
+    {{ include('crud/article/_form.html.twig') }}
+
+    <a href="{{ path('c_r_u_d_article_index') }}">back to list</a>
+{% endblock %}

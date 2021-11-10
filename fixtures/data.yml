@@ -1,0 +1,14 @@
+App\Entity\Article:
+  article1:
+    title: Article de test
+    content: <text()>
+    description: <paragraph(2)>
+    createdAt: <dateTimeBetween('-1 week', '+1 week')>
+    updatedAt: <dateTimeBetween('-1 week', '+1 week')>
+
+  article{2..200}:
+    title: <sentence()>
+    content: <text()>
+    description: <paragraph(2)>
+    createdAt: <dateTimeBetween('-1 week', '+1 week')>
+    updatedAt: <dateTimeBetween('-1 week', '+1 week')>
