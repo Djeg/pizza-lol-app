@@ -25,6 +25,10 @@ class ArticleSearchType extends AbstractType
                 'label' => 'Rechercher par titre :',
                 'required' => false,
             ])
+            ->add('authorName', TextType::class, [
+                'label' => 'Rechercher par auteur :',
+                'required' => false,
+            ])
             ->add('orderBy', ChoiceType::class, [
                 'label' => 'Trier par :',
                 'choices' => [

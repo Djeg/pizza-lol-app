@@ -42,6 +42,12 @@ class Article
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +109,18 @@ class Article
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

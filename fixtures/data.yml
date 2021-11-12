@@ -1,3 +1,30 @@
+App\Entity\User:
+  user1:
+    email: user@mail.com
+    roles: ["ROLE_USER"]
+    password: \$2y\$13\$hzQEaVUFqvY0E4emivmAeOdLWv2xl/WiE0Fs2iuhGQ2wwzS8SD8nm
+
+  user2:
+    email: admin@mail.com
+    roles: ["ROLE_ADMIN"]
+    password: \$2y\$13\$hzQEaVUFqvY0E4emivmAeOdLWv2xl/WiE0Fs2iuhGQ2wwzS8SD8nm
+
+  user3:
+    email: specialuser@mail.com
+    roles: ["ROLE_SPECIAL_USER"]
+    password: \$2y\$13\$hzQEaVUFqvY0E4emivmAeOdLWv2xl/WiE0Fs2iuhGQ2wwzS8SD8nm
+
+App\Entity\Author:
+  author1:
+    firstname: John
+    lastname: Doe
+    description: <paragraph(3)>
+
+  author{2..20}:
+    firstname: <firstName()>
+    lastname: <lastName()>
+    description: <paragraph(3)>
+
 App\Entity\Article:
   article1:
     title: Article de test
@@ -5,6 +32,7 @@ App\Entity\Article:
     description: <paragraph(2)>
     createdAt: <dateTimeBetween('-1 week', '+1 week')>
     updatedAt: <dateTimeBetween('-1 week', '+1 week')>
+    author: "@author1"
 
   article{2..200}:
     title: <sentence()>
@@ -12,3 +40,4 @@ App\Entity\Article:
     description: <paragraph(2)>
     createdAt: <dateTimeBetween('-1 week', '+1 week')>
     updatedAt: <dateTimeBetween('-1 week', '+1 week')>
+    author: "@author*"

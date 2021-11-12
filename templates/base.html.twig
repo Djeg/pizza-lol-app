@@ -6,6 +6,7 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
@@ -14,6 +15,12 @@
         {% endblock %}
     </head>
     <body>
+        {% if app.user %}
+            <p>Bienvenue {{ app.user.email }}</p>
+        {% endif %}
+        {% if is_granted('ROLE_USER') %}
+            <p>Vous avez le role user</p>
+        {% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>

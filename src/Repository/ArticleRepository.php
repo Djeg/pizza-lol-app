@@ -37,6 +37,17 @@ class ArticleRepository extends ServiceEntityRepository
                 ->setParameter('title', "%{$criteria->search}%");
         }
 
+        if ($criteria->authorName) {
+            // { firtsname: John, lastname: Doe }
+            // Jo => John
+            // Jo => JohnDoe
+            // Jo => John Doe
+            $queryBuilder = $queryBuilder
+                ->join('article.author', 'author')
+                ->andWhere("CONCAT(author.firstname, CONCAT(' ', author.lastname)) LIKE :authorName")
+                ->setParameter('authorName', "%{$criteria->authorName}%");
+        }
+
         return $queryBuilder->getQuery()->getResult();
     }
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello SignUpController!{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Les derniers articles</h1>
+    <h1>Inscription</h1>
 
     {{ form(form) }}
-
-    {% for article in articles %}
-        <p>{{ article.title }} ({{ article.author.firstname }} {{ article.author.lastname }})</p>
-    {% endfor %}
 </div>
 {% endblock %}
