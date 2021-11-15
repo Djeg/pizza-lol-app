@@ -1,0 +1,21 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - Rechercher{% endblock %}
+
+{% block body %}
+<h1>Rechercher des livres</h1>
+
+{{ form(form) }}
+
+<div class="grid">
+    {% for book in books %}
+        <a class="thumb book">
+            <img src="{{ book.image }}" alt="{{ book.title }}" />
+            <p>{{ book.title }}</p>
+            <p>{{ book.shortDescription }}</p>
+            <p>{{ book.price }} €</p>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
