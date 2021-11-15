@@ -65,6 +65,23 @@ class Book
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="books")
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $dealer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -162,6 +179,42 @@ class Book
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getDealer(): ?User
+    {
+        return $this->dealer;
+    }
+
+    public function setDealer(?User $dealer): self
+    {
+        $this->dealer = $dealer;
 
         return $this;
     }

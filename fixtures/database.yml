@@ -1,3 +1,82 @@
 # Ce fichier contient toutes les données nescessaire au bon
 # fonctionnement du projet. Il utilise Alice afin de générer
 # des données facilement
+App\Entity\User:
+  user1:
+    email: "user@mail.com"
+    password: \$2y\$13\$5tT4jRAoaz3errpoY.byXOWZNaZxGODH6CkIukdhnGZWcJM9eQS1e
+
+  user{2..50}:
+    email: "<safeEmail()>"
+    password: \$2y\$13\$5tT4jRAoaz3errpoY.byXOWZNaZxGODH6CkIukdhnGZWcJM9eQS1e
+
+  user_admin:
+    email: "admin@mail.com"
+    roles: ["ROLE_ADMIN"]
+    password: \$2y\$13\$RjRNF5QRRTdZXWSOMs7O3uxNK3LbJFRLy/P/IDafkSoQWlem21d3m
+
+App\Entity\Category:
+  category1:
+    title: "Science Fiction"
+  category2:
+    title: "Histoire"
+  category3:
+    title: "Policier"
+  category4:
+    title: "Fantaisie"
+  category5:
+    title: "Littérature"
+  category6:
+    title: "Poésie"
+  category7:
+    title: "Biographie"
+  category8:
+    title: "Politique"
+  category9:
+    title: "Science"
+
+App\Entity\Author:
+  author1:
+    firstname: "J.K."
+    lastname: "Rowling"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/J._K._Rowling_2010.jpg/800px-J._K._Rowling_2010.jpg"
+    description: |
+      Joanne Rowling, plus connue sous les noms de plume J. K. Rowling et Robert Galbraith,
+      est une romancière et scénariste britannique née le 31 juillet 1965 dans l’agglomération
+      de Yate (Gloucestershire du Sud).
+      Elle doit sa notoriété mondiale à la série Harry Potter, dont les romans traduits
+      en près de quatre-vingts langues ont été vendus à plus de 500 millions d'exemplaires dans le monde.
+  author{2..50}:
+    firstname: "<firstName()>"
+    lastname: "<lastName()>"
+    image: "<imageUrl()>"
+    description: "<text()>"
+
+App\Entity\Book:
+  book1:
+    title: "Harry Potter - L'école des sorciers"
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.3WAgyFQ9LF6jaQ1mho6cUwAAAA%26pid%3DApi&f=1"
+    description: |
+      Harry Potter à l'école des sorciers (Harry Potter and the Philosopher's Stone)
+      est le premier roman de la série littéraire centrée sur le personnage
+      de Harry Potter, créé par J. K. Rowling. Sorti le 26 juin 1972,
+      il est initialement tiré à 500 exemplaires.
+      En France, le roman a été publié le 9 octobre 1981.
+    shortDescription: |
+      Harry Potter à l'école des sorciers
+      est le premier roman de la série littéraire centrée sur le personnage
+      de Harry Potter
+    price: 8.79
+    dealer: "@user1"
+    category: "@category4"
+    author: "@author1"
+
+  book{2..100}:
+    title: "<word()> <word()>"
+    image: "<imageUrl()>"
+    description: "<text()>"
+    shortDescription: "<sentence()>"
+    price: "<randomFloat(2, 5, 20)>"
+    dealer: "@user*"
+    category: "@category*"
+    author: "@author*"
