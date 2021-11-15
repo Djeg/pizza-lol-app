@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library Shop - Accueil{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Accueil</h1>
+
+    <p>
+    Bienvenue sur Library Shop, le site de vente de livres entre particuliers.
+    </p>
+
+    <h2>Les derniers livres</h2>
+
+    <div class="grid">
+        {% for book in books %}
+            <a class="thumb book">
+                <img src="{{ book.image }}" alt="{{ book.title }}" />
+                <p>{{ book.title }}</p>
+                <p>{{ book.shortDescription }}</p>
+                <p>{{ book.price }} €</p>
+            </a>
+        {% endfor %}
+    </div>
+
+    <h2>Les derniers auteurs</h2>
+
+    <div class="grid">
+        {% for author in authors %}
+            <a class="thumb book">
+                <img src="{{ author.image }}" alt="{{ author.firstname }} {{ author.lastname }}" />
+                <p>{{ author.firstname }} {{ author.lastname }}</p>
+            </a>
+        {% endfor %}
+    </div>
+
+    <h2>Les dernieres catégories</h2>
+
+    <div class="grid">
+        {% for category in categories %}
+            <a class="thumb book">
+                <p>{{ category.title }}</p>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
