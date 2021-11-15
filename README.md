@@ -11,7 +11,7 @@ pouvez implémenter dans l'ordre que vous souhaitez :
 1. Mettre en place un projet symfony avec la commande :
    `symfony new lib-shop --full`
 
-2. Configurer un base de données en éditant le fichier
+2. Configurer une base de données en éditant le fichier
    `.env`
 
 3. Installer alice avec : `composer install hautelook/alice-bundle`
