@@ -1,14 +1,23 @@
 {% extends 'front/front.html.twig' %}
 
-{% block title %}Library Shop - Rechercher{% endblock %}
+{% block title %}Library Shop - {{ author.firstname }} {{ author.lastname }}{% endblock %}
 
 {% block content %}
-<h1>Rechercher des livres</h1>
+<h1>{{ author.firstname }} {{ author.lastname }}</h1>
 
-{{ form(form) }}
+<p>
+    <a href="{{ path('app_front_home_index') }}">Retour</a>
+</p>
+
+<p>
+    <img src="{{ author.image }}" alt="{{ author.fullName }}" />
+    {{ author.description }}
+</p>
+
+<h2>Ses derniers livres</h2>
 
 <div class="grid">
-    {% for book in books %}
+    {% for book in author.books %}
         <a class="thumb book" href="{{ path('app_front_book_show', { id: book.id, slug: book.slug }) }}">
             <img src="{{ book.image }}" alt="{{ book.title }}" />
             <p>{{ book.title }}</p>
@@ -17,5 +26,6 @@
         </a>
     {% endfor %}
 </div>
+
 
 {% endblock %}

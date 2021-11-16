@@ -25,4 +25,17 @@ class BookController extends AbstractController
             'books' => $books,
         ]);
     }
+
+    #[Route('/livre/{id}-{slug}', name: 'app_front_book_show')]
+    public function show(int $id, string $slug, BookRepository $repository): Response
+    {
+        $book = $repository->findOneBy([
+            'id' => $id,
+            'slug' => $slug,
+        ]);
+
+        return $this->render('front/book/show.html.twig', [
+            'book' => $book,
+        ]);
+    }
 }

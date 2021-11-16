@@ -1,0 +1,28 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - {{ book.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ book.title }} </h1>
+
+<p>
+    <a href="{{ path('app_front_home_index') }}">Retour</a>
+</p>
+
+<p>
+    <img src="{{ book.image }}" alt="{{ book.title }}" />
+    {{ book.description }}
+</p>
+
+<ul>
+    <li>Prix : {{ book.price }}</li>
+    <li>Auteur : {{ book.author.firstname }} {{ book.author.lastname }}</li>
+    <li>Vendu par : {{ book.dealer.email }}</li>
+</ul>
+
+<p>
+    <a href="{{ path('app_front_home_index') }}">Retour</a>
+</p>
+
+
+{% endblock %}

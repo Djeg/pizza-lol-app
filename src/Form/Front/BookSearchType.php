@@ -43,12 +43,15 @@ class BookSearchType extends AbstractType
             ])
             ->add('page', NumberType::class, [
                 'label' => 'Page :',
+                'empty_data' => $options['data']->page,
             ])
             ->add('limit', NumberType::class, [
                 'label' => 'Nombre de résultat maximum :',
+                'empty_data' => $options['data']->limit,
             ])
             ->add('orderBy', ChoiceType::class, [
                 'label' => 'Trier par :',
+                'empty_data' => $options['data']->orderBy,
                 'choices' => [
                     'Date' => 'updatedAt',
                     'Prix' => 'price',
@@ -57,6 +60,7 @@ class BookSearchType extends AbstractType
             ])
             ->add('direction', ChoiceType::class, [
                 'label' => 'Sens du trie :',
+                'empty_data' => $options['data']->direction,
                 'choices' => [
                     'Croissant' => 'ASC',
                     'Décroissant' => 'DESC',
