@@ -1,0 +1,24 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - Revendeur {{ dealer.email }}{% endblock %}
+
+{% block content %}
+<h1>Revendeur {{ dealer.fullName }}</h1>
+
+<p>
+    <a href="{{ path('app_front_home_index') }}">Retour</a>
+</p>
+
+<h2>Ses derniers livres</h2>
+
+<div class="grid">
+    {% for book in dealer.books %}
+        {% include 'front/partials/_bookThumb.html.twig' %}
+    {% endfor %}
+</div>
+
+<p>
+    <a href="{{ path('app_front_home_index') }}">Retour</a>
+</p>
+
+{% endblock %}

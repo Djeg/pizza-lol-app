@@ -13,12 +13,7 @@ Bienvenue sur Library Shop, le site de vente de livres entre particuliers.
 
 <div class="grid">
     {% for book in books %}
-        <a class="thumb book" href="{{ path('app_front_book_show', { id: book.id, slug: book.slug }) }}">
-            <img src="{{ book.image }}" alt="{{ book.title }}" />
-            <p>{{ book.title }}</p>
-            <p>{{ book.shortDescription }}</p>
-            <p>{{ book.price }} €</p>
-        </a>
+        {% include 'front/partials/_bookThumb.html.twig' %}
     {% endfor %}
 </div>
 

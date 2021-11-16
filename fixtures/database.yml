@@ -4,15 +4,24 @@
 App\Entity\User:
   user1:
     email: "user@mail.com"
+    firstname: John
+    lastname: Doe
+    image: "<imageUrl(80, 80)>"
     password: \$2y\$13\$5tT4jRAoaz3errpoY.byXOWZNaZxGODH6CkIukdhnGZWcJM9eQS1e
 
   user{2..50}:
     email: "<safeEmail()>"
+    firstname: "<firstName()>"
+    lastname: "<lastName()>"
+    image: "<imageUrl(80, 80)>"
     password: \$2y\$13\$5tT4jRAoaz3errpoY.byXOWZNaZxGODH6CkIukdhnGZWcJM9eQS1e
 
   user_admin:
     email: "admin@mail.com"
+    firstname: Super
+    lastname: Admin
     roles: ["ROLE_ADMIN"]
+    image: "<imageUrl(80, 80)>"
     password: \$2y\$13\$RjRNF5QRRTdZXWSOMs7O3uxNK3LbJFRLy/P/IDafkSoQWlem21d3m
 
 App\Entity\Category:

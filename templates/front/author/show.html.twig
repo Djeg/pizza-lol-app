@@ -11,6 +11,7 @@
 
 <p>
     <img src="{{ author.image }}" alt="{{ author.fullName }}" />
+    <br />
     {{ author.description }}
 </p>
 
@@ -18,12 +19,7 @@
 
 <div class="grid">
     {% for book in author.books %}
-        <a class="thumb book" href="{{ path('app_front_book_show', { id: book.id, slug: book.slug }) }}">
-            <img src="{{ book.image }}" alt="{{ book.title }}" />
-            <p>{{ book.title }}</p>
-            <p>{{ book.shortDescription }}</p>
-            <p>{{ book.price }} €</p>
-        </a>
+        {% include 'front/partials/_bookThumb.html.twig' %}
     {% endfor %}
 </div>
 

@@ -9,6 +9,15 @@
     <a href="{{ path('app_front_home_index') }}">Retour</a>
 </p>
 
+{% if app.user and app.user.id == book.dealer.id %}
+    <p>
+        <a href="{{ path('app_front_book_modify', { id: book.id, slug: book.slug }) }}">Modifier le livre</a>
+    </p>
+    <p>
+        <a href="{{ path('app_front_book_delete', { id: book.id }) }}">Supprimer le livre</a>
+    </p>
+{% endif %}
+
 <p>
     <img src="{{ book.image }}" alt="{{ book.title }}" />
     {{ book.description }}
@@ -16,8 +25,16 @@
 
 <ul>
     <li>Prix : {{ book.price }}</li>
-    <li>Auteur : {{ book.author.firstname }} {{ book.author.lastname }}</li>
-    <li>Vendu par : {{ book.dealer.email }}</li>
+    <li>Auteur : 
+        <a href="{{ path('app_front_author_show', { id: book.author.id, slug: book.author.slug }) }}">
+            {{ book.author.fullName }}
+        </a>
+    </li>
+    <li>Vendu par : 
+        <a href="{{ path('app_front_user_showDealer', { id: book.dealer.id }) }}">
+        {{ book.dealer.email }}
+        </a>
+    </li>
 </ul>
 
 <p>
