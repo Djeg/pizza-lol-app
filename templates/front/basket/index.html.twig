@@ -1,0 +1,26 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - Mon Panier{% endblock %}
+
+{% block content %}
+<h1>Mon Panier</h1>
+
+{% if app.user.basket.books.count() == 0 %}
+    <p>Votre panier est vide</p>
+{% else %}
+    <p>Vous avez {{ app.user.basket.books.count() }} livre(s) dans votre panier</p>
+
+
+    <div class="grid">
+    {% for book in app.user.basket.books %}
+        {% include 'front/partials/_bookThumb.html.twig' %}
+    {% endfor %}
+    </div>
+
+    <p>Total : <strong>{{ app.user.basket.totalPrice }} €</strong></p>
+    <p>
+        <a href="#">Acheter</a>
+    </p>
+{% endif %}
+
+{% endblock %}

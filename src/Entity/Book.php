@@ -82,6 +82,16 @@ class Book
      */
     private $dealer;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $sold = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $soldAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -215,6 +225,30 @@ class Book
     public function setDealer(?User $dealer): self
     {
         $this->dealer = $dealer;
+
+        return $this;
+    }
+
+    public function getSold(): ?bool
+    {
+        return $this->sold;
+    }
+
+    public function setSold(bool $sold): self
+    {
+        $this->sold = $sold;
+
+        return $this;
+    }
+
+    public function getSoldAt(): ?\DateTimeInterface
+    {
+        return $this->soldAt;
+    }
+
+    public function setSoldAt(?\DateTimeInterface $soldAt): self
+    {
+        $this->soldAt = $soldAt;
 
         return $this;
     }
