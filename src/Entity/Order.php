@@ -44,6 +44,18 @@ class Order
      */
     private $updatedAt;
 
+    public static function makeFromBasket(Basket $basket): Order
+    {
+        $order = new Order();
+        $order->setUser($basket->getUser());
+        
+        foreach ($basket->getBooks() as $book) {
+            $order->addBook($book);
+        }
+        
+        return $order;
+    }
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
@@ -78,6 +90,9 @@ class Order
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
+
+            $book->setSoldAt(new \DateTime());
+            $book->setSold(true);
         }
 
         return $this;
@@ -112,5 +127,16 @@ class Order
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function getTotalPrice(): float
+    {
+        $total = 0.0;
+
+        foreach ($this->books as $book) {
+            $total += $book->getPrice();
+        }
+
+        return $total;
     }
 }

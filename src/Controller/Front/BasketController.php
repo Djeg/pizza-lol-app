@@ -19,6 +19,13 @@ class BasketController extends AbstractController
         return $this->render('front/basket/index.html.twig');
     }
 
+    #[Route('/mon-panier/validation', name: 'app_front_basket_validate')]
+    #[IsGranted('ROLE_USER')]
+    public function validate(): Response
+    {
+        return $this->render('front/basket/validate.html.twig');
+    }
+
     #[Route('/mon-panier/ajouter/{id}', name: 'app_front_basket_add')]
     #[IsGranted('ROLE_USER')]
     public function add(Request $request, Book $book, EntityManagerInterface $manager): Response

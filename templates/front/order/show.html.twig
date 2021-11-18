@@ -1,0 +1,21 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - Ma Commande{% endblock %}
+
+{% block content %}
+<h1>Votre du commande du {{ order.createdAt|date('d/m/Y à H:i') }}</h1>
+
+<p><a href="{{ path('app_front_order_index') }}">Retour à la liste de mes commandes</a></p>
+
+<p>Vous avez payer : {{ order.totalPrice }} €</p>
+
+<h2>Les livres que vous avez achetés</h2>
+
+<div class="grid">
+{% for book in order.books %}
+    <p>{{ book.title }} ({{ book.price }} €)</p>
+{% endfor %}
+</div>
+
+{% endblock %}
+

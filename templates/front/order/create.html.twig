@@ -1,0 +1,15 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - Valider ma commande{% endblock %}
+
+{% block content %}
+<h1>Validation de ma commander</h1>
+
+<p>Vous voulez payer {{ app.user.basket.books.count() }} livre(s) dans votre panier</p>
+<p>Total : <strong>{{ app.user.basket.totalPrice }} €</strong></p>
+
+
+{{ form(form) }}
+
+{% endblock %}
+

@@ -119,4 +119,11 @@ class Basket
 
         return $this;
     }
+
+    public function clear(): self
+    {
+        $this->books = new ArrayCollection();
+
+        return $this;
+    }
 }

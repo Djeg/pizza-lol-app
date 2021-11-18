@@ -10,6 +10,7 @@
                     {% if is_granted('ROLE_USER') %}
                         <li><a href="{{ path('app_front_basket_index') }}">Mon Panier ({{ app.user.basket.books.count() }})</a></li>
                         <li><a href="{{ path('app_front_book_sell') }}">Revendre un livre</a></li>
+                        <li><a href="{{ path('app_front_order_index') }}">Mes commandes</a></li>
                         <li><a href="{{ path('app_front_user_profile') }}">Mon profile</a></li>
                         <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
                     {% else %}

@@ -1,0 +1,22 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - Mon Panier{% endblock %}
+
+{% block content %}
+<h1>Validation de mon panier</h1>
+
+<p>Vous avez {{ app.user.basket.books.count() }} livre(s) dans votre panier</p>
+
+
+<div class="grid">
+{% for book in app.user.basket.books %}
+    <p>{{ book.title }} ({{ book.price }} €)</p>
+{% endfor %}
+</div>
+
+<p>Total : <strong>{{ app.user.basket.totalPrice }} €</strong></p>
+<p>
+    <a href="{{ path('app_front_order_create') }}">Valider et payer</a>
+</p>
+
+{% endblock %}

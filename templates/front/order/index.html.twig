@@ -1,0 +1,20 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Library Shop - Mes Commandes{% endblock %}
+
+{% block content %}
+<h1>Mes commandes</h1>
+
+{% if orders|length == 0 %}
+    <p>Vous n'avez pas encore de commandes</p>
+{% else %}
+    {% for order in orders %}
+        <p>
+            <a href="{{ path('app_front_order_show', { id: order.id }) }}">
+                Commande du {{ order.createdAt|date('d/m/Y à H:i') }} (montant: {{ order.totalPrice }} €)
+            </a>
+        </p>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

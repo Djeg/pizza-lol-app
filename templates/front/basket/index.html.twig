@@ -19,7 +19,7 @@
 
     <p>Total : <strong>{{ app.user.basket.totalPrice }} €</strong></p>
     <p>
-        <a href="#">Acheter</a>
+        <a href="{{ path('app_front_basket_validate') }}">Acheter</a>
     </p>
 {% endif %}
 
