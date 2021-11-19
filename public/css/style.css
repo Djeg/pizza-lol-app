@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --color-eggshell: #F4F1DE;
+    --color-terra-cotta: #E07A5F;
+    --color-independence: #3D405B;
+    --color-green-sheen: #81B29A;
+    --color-deep-champagne: #F2CC8F;
+    --font-size: 18px;
+    --mg-big: 1.8rem;
+    --mg-medium: 1.2rem;
+    --mg-normal: 0.8rem;
+    --mg-light: 0.6rem;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-eggshell);
+    font-size: var(--font-size);
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-independence);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-green-sheen);
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.menu ul li a {
+    display: block;
+    padding: var(--mg-big);
+    text-align: center;
+    font-size: 0.8rem;
+    transition: all .5s;
+}
+
+.menu ul li a:hover {
+    background-color: var(--color-independence);
+    color: var(--color-eggshell);
+}

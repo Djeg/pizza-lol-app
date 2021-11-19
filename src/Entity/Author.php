@@ -8,6 +8,7 @@ use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * Représente un auteur d'un livre.
@@ -52,6 +53,7 @@ class Author
 
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="author")
+     * @Ignore()
      */
     private $books;
 

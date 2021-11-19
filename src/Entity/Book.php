@@ -66,18 +66,18 @@ class Book
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="books", fetch="EAGER")
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="books", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $dealer;

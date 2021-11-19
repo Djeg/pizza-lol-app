@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * Représente une catégorie de livre donné, comme par éxemple
@@ -42,6 +43,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="category")
+     * @Ignore()
      */
     private $books;
 

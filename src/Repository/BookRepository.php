@@ -38,6 +38,12 @@ class BookRepository extends ServiceEntityRepository
     public function findByCriteria(BookSearchCriteria $criteria): array
     {
         $qb = $this->createQueryBuilder('book')
+            ->leftJoin('book.author', 'author')
+            ->addSelect('author')
+            ->leftJoin('book.category', 'category')
+            ->addSelect('category')
+            ->leftJoin('book.dealer', 'dealer')
+            ->addSelect('dealer')
             ->setMaxResults($criteria->limit)
             ->setFirstResult(($criteria->page - 1) * $criteria->limit)
             ->orderBy("book.{$criteria->orderBy}", $criteria->direction);
@@ -56,21 +62,18 @@ class BookRepository extends ServiceEntityRepository
 
         if (null !== $criteria->author) {
             $qb = $qb
-                ->leftJoin('book.author', 'author')
                 ->andWhere('CONCAT(author.firstname, CONCAT(\' \', author.lastname)) LIKE :author')
                 ->setParameter('author', "%{$criteria->author}%");
         }
 
         if (null !== $criteria->category) {
             $qb = $qb
-                ->leftJoin('book.category', 'category')
                 ->andWhere('category.title LIKE :category')
                 ->setParameter('category', "%{$criteria->category}%");
         }
 
         if (null !== $criteria->dealer) {
             $qb = $qb
-                ->leftJoin('book.dealer', 'dealer')
                 ->andWhere('dealer.email LIKE :dealer')
                 ->setParameter('dealer', "%{$criteria->dealer}%");
         }
